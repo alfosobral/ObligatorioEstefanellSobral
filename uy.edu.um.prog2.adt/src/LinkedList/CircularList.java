@@ -1,4 +1,4 @@
-package Listas;
+package LinkedList;
 
 public class CircularList<T> implements MyList<T> {
 

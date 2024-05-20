@@ -1,6 +1,4 @@
-package LinkedList;
-
-import java.util.Arrays;
+package TADs.Stack;
 
 public class Node<T> implements Comparable<Node<T>> {
     private T value;
@@ -39,17 +37,6 @@ public class Node<T> implements Comparable<Node<T>> {
         if (!this.getValue().equals(node.getValue())) {
             if (this.getValue() instanceof Integer) {
                 salida = (Integer) this.getValue() - (Integer) node.getValue();
-
-            } else if (this.getValue() instanceof String) {
-                String v1 = (String) (this.getValue());
-                String v2 = (String) (node.getValue());
-                String[] s = {v1.toLowerCase(), v2.toLowerCase()};
-                Arrays.sort(s);
-                if (s[0].equals(v1.toLowerCase())) {
-                    salida = 1;
-                } else {
-                    salida = -1;
-                }
             }
 
         }

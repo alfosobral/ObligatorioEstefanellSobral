@@ -1,4 +1,4 @@
-package Queue;
+package TADs.Queue;
 public class Queue<T> implements MyQueue<T>{
 
     private Node<T> first;                      // First es el nodo que llego primero a la fila, o sea, todos los nodos que agregue van atras del first: A - B - C - ... - First

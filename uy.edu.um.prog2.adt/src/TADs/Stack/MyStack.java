@@ -1,6 +1,6 @@
-package Stack;
+package TADs.Stack;
 
-import Stack.Exceptions.EmptyStack;
+import TADs.Stack.Exceptions.EmptyStack;
 
 public interface MyStack<T> {
     void push(T value);

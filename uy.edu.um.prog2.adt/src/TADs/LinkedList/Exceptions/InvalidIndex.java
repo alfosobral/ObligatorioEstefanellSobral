@@ -1,4 +1,4 @@
-package LinkedList.Exceptions;
+package TADs.LinkedList.Exceptions;
 
 public class InvalidIndex extends Exception{
 }

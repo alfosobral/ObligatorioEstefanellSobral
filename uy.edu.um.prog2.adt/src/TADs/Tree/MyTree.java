@@ -1,7 +1,7 @@
-package Tree;
+package TADs.Tree;
 
-import Tree.Exceptions.EmptyTree;
-import Tree.Exceptions.InvalidKey;
+import TADs.Tree.Exceptions.EmptyTree;
+import TADs.Tree.Exceptions.InvalidKey;
 public interface MyTree<K, T> {
     public T Serch(K key) throws EmptyTree, InvalidKey;
 

@@ -1,8 +1,8 @@
-package LinkedList;
+package TADs.LinkedList;
 
 
-import LinkedList.Exceptions.EmptyList;
-import LinkedList.Exceptions.InvalidIndex;
+import TADs.LinkedList.Exceptions.EmptyList;
+import TADs.LinkedList.Exceptions.InvalidIndex;
 
 public class LinkedList<T> implements MyList<T> {
     private Node<T> first;

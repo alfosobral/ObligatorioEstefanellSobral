@@ -79,7 +79,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
             }
             LinkedList<Node<K,T>> list = new LinkedList<Node<K,T>>();
             del.getChildList(list);
-            list.remove(list.get(0));
+            list.removeValue(list.get(0));
             for (int i = 0; i < list.size(); i ++) {
                 list.get(i).setRightChild(null);
                 list.get(i).setLeftChild(null);

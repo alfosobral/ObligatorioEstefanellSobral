@@ -1,5 +1,8 @@
 package LinkedList;
 
+import LinkedList.Exceptions.EmptyList;
+import LinkedList.Exceptions.InvalidIndex;
+
 public class DoubleLinked<T> implements MyList<T> {
 
     private Node<T> first;
@@ -54,7 +57,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public void remove(T value) {
+    public void removeValue(T value) {
         if (this.first != null) {
             if (!this.first.getValue().equals(value)) {
                 Node<T> temp = this.first;
@@ -78,7 +81,35 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public int size() {
+    public void removePosition(int pos) throws InvalidIndex{
+        if (this.first != null) {
+            int contador = 1;
+            if (pos != 1) {
+                Node<T> temp = this.first;
+                while (temp.getNext() != null && contador != pos) {
+                    temp = temp.getNext();
+                }
+                if (contador == pos && temp.getNext() != null) {
+                    temp.getPrevious().setNext(temp.getNext());
+                    temp.getNext().setPrevious(temp.getPrevious());
+                } else if (contador == pos && temp.getNext() == null) {
+                    temp.getPrevious().setNext(null);
+                } else {
+                    throw new InvalidIndex();
+                }
+            } else if (pos == 1 && this.first.getNext() != null) {
+                this.first = this.first.getNext();
+                this.first.setPrevious(null);
+            } else {
+                this.first = null;
+            }
+        }
+
+    }
+
+
+    @Override
+    public int size() throws EmptyList {
         int size = 0;
         if (this.first != null) {
             Node<T> temp = this.first;
@@ -87,6 +118,8 @@ public class DoubleLinked<T> implements MyList<T> {
                 temp = temp.getNext();
                 size++;
             }
+        } else {
+            throw new EmptyList();
         }
         return size;
     }

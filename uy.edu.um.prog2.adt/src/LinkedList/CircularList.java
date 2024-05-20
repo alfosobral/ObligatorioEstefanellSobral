@@ -1,5 +1,8 @@
 package LinkedList;
 
+import LinkedList.Exceptions.EmptyList;
+import LinkedList.Exceptions.InvalidIndex;
+
 public class CircularList<T> implements MyList<T> {
 
     private Node<T> access;
@@ -51,7 +54,7 @@ public class CircularList<T> implements MyList<T> {
     }
 
     @Override
-    public void remove(T value) {
+    public void removeValue(T value) {
         Node<T> temp = this.access;
         if (!this.access.getValue().equals(value)) {
             while (temp.getNext() != this.access && !temp.getValue().equals(value)) {
@@ -72,7 +75,33 @@ public class CircularList<T> implements MyList<T> {
     }
 
     @Override
-    public int size() {
+    public void removePosition(int pos) throws InvalidIndex, EmptyList {
+        if (this.access != null) {
+            Node<T> temp = this.access;
+            int contador = 1;
+            if (pos != 1) {
+                while (temp.getNext() != this.access && contador != pos) {
+                    temp = temp.getNext();
+                }
+                if (contador == pos) {
+                    Node<T> ant = temp.getPrevious();
+                    Node<T> sig = temp.getNext();
+                    ant.setNext(sig);
+                    sig.setPrevious(ant);
+                }
+            } else {
+                Node<T> aux = this.access.getPrevious();
+                aux.setNext(this.access.getNext());
+                this.access = this.access.getNext();
+                this.access.setPrevious(aux);
+            }
+        } else {
+            throw new EmptyList();
+        }
+    }
+
+    @Override
+    public int size() throws EmptyList {
         int size = 0;
         if (this.access != null) {
             Node<T> temp = this.access;
@@ -81,6 +110,8 @@ public class CircularList<T> implements MyList<T> {
                 temp = temp.getNext();
                 size++;
             }
+        } else {
+            throw new EmptyList();
         }
         return size;
     }
@@ -115,21 +146,4 @@ public class CircularList<T> implements MyList<T> {
         }
     }
 
-    public void juego(int saltos) {
-        if (this.access != null) {
-            Node<T> temp = this.access;
-            while (this.size() != 1) {
-                for (int i = 0; i < saltos ; i++) {
-                    temp = temp.getNext();
-                }
-                Node<T> aux = temp.getNext();
-                System.out.println("Ha perdido " + temp.getValue() + "\n");
-                this.remove(temp.getValue());
-                temp = aux;
-                this.printList();
-            }
-            System.out.println("EL GANADOR ES " + temp.getValue());
-        } else {
-            System.out.println("No se puede jugar sin jugadores!");
-        }
-}}
+}

@@ -1,4 +1,4 @@
-package Listas;
+package LinkedList;
 
 public class DoubleLinked<T> implements MyList<T> {
 

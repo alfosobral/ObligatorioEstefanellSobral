@@ -19,6 +19,19 @@ public class LinkedList<T> implements MyList<T> {
             this.first = aux;                             //seteo el ultimo nodo para que ahora sea el que agregamos
         }
     }
+
+    public void add(T value) {
+        Node<T> add = new Node<>(value);
+        if (first == null) {
+            first = add;
+        } else {
+            Node<T> temp = first;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            }
+            temp.setNext(add);
+        }
+    }
     @Override
     public T get(int position) {
         T valueToReturn = null;                      //primero seteo el valor a devolver como null

@@ -3,14 +3,11 @@ package Queue;
 import java.util.Arrays;
 
 public class Node<T> implements Comparable<Node<T>> {
-
-    private int priority;
     private T value;
     private Node<T> next;
     private Node<T> previous;
 
-    public Node(T value, int priority) {
-        this.priority = priority;
+    public Node(T value) {
         this.value = value;
         this.next = null;
         this.previous = null;
@@ -59,11 +56,6 @@ public class Node<T> implements Comparable<Node<T>> {
         return salida;
     }
 
-    public int getPriority() {
-        return this.priority;
-    }
-    public int comparePriority(Node<T> node) {
-        return (this.priority - node.getPriority());
-    }
+
 }
 

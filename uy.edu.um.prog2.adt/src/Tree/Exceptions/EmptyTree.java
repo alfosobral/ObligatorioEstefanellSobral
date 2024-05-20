@@ -1,2 +1,4 @@
-package Tree.Exceptions;public class EmptyTree {
+package Tree.Exceptions;
+
+public class EmptyTree extends Exception{
 }

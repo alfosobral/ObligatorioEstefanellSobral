@@ -1,2 +1,4 @@
-package Tree.Exceptions;public class InvalidKey {
+package Tree.Exceptions;
+
+public class InvalidKey extends Exception{
 }

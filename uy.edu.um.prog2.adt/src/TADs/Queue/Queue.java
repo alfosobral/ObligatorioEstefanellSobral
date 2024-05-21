@@ -17,7 +17,9 @@ public class Queue<T> implements MyQueue<T>{
             this.last = add;
             this.first = add;
             this.last.setNext(this.first);
-            this.first.setPrevious(this.last);         //Si el last es nulo, el first tambien, entonces el add va a ser el unico nodo
+            this.first.setPrevious(this.last);
+            this.first.setNext(null);
+            this.last.setPrevious(null);                                                        //Si el last es nulo, el first tambien, entonces el add va a ser el unico nodo
         }
 
     }

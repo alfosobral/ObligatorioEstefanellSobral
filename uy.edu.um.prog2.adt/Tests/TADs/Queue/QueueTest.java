@@ -18,10 +18,11 @@ class QueueTest {
         queue.enqueue(test2.getValue());
         queue.enqueue(test3.getValue());
         queue.enqueue(test4.getValue());
+        assertTrue(queue.contains(test2.getValue()));
         int size = queue.getSize();
         Object value1 = queue.dequeue().getValue();
         queue.enqueue(value1);
-        assertEquals(4,size);   //revisar size pq queda en loop
+        assertEquals(4,size);
         assertEquals(value1, test4.getValue());
     }
 

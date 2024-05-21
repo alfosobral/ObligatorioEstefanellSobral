@@ -1,5 +1,6 @@
 package TADs.Tree;
 
+import TADs.Queue.Exceptions.EmptyQueue;
 import TADs.Tree.Exceptions.InvalidKey;
 import TADs.LinkedList.LinkedList;
 import TADs.Queue.Queue;
@@ -89,14 +90,14 @@ public class Node<K,T> implements Comparable<K>{
         if (this.leftChild != null) {
             this.leftChild.inOrder(list);
         }
-        list.add(this.data);
+        list.addLast(this.data);
         if (this.rightChild != null) {
             this.rightChild.inOrder(list);
         }
     }
 
     public void preOrder(LinkedList<T> list) {
-        list.add(this.data);
+        list.addLast(this.data);
         if (this.leftChild != null) {
             this.leftChild.preOrder(list);
         }
@@ -112,7 +113,7 @@ public class Node<K,T> implements Comparable<K>{
         if (this.rightChild != null) {
             this.rightChild.postOrder(list);
         }
-        list.add(this.data);
+        list.addLast(this.data);
     }
 
     public Node<K,T> findParent(K key) throws InvalidKey {
@@ -142,7 +143,7 @@ public class Node<K,T> implements Comparable<K>{
     }
 
     public void getChildList(LinkedList<Node<K,T>> list) {
-        list.add(this);
+        list.addLast(this);
         if (this.leftChild != null) {
             this.leftChild.getChildList(list);
         }
@@ -150,7 +151,7 @@ public class Node<K,T> implements Comparable<K>{
             this.rightChild.getChildList(list);
         }
     }
-    public void levelRouting(Queue<Node<K,T>> queue) {
+    public void levelRouting(Queue<Node<K,T>> queue) throws EmptyQueue {
         Node<K,T> temp = null;
         int originalSize = queue.getSize();
         boolean haySiguienteNivel = false;

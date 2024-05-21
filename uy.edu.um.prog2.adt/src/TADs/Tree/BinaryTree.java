@@ -3,6 +3,7 @@ package TADs.Tree;
 import TADs.LinkedList.Exceptions.EmptyList;
 import TADs.LinkedList.Exceptions.InvalidIndex;
 import TADs.LinkedList.LinkedList;
+import TADs.Queue.Exceptions.EmptyQueue;
 import TADs.Queue.Queue;
 import TADs.Tree.Exceptions.EmptyTree;
 import TADs.Tree.Exceptions.InvalidKey;
@@ -175,7 +176,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
         return minimum;
     }
 
-    public void levelRouting() throws EmptyTree{
+    public void levelRouting() throws EmptyTree, EmptyQueue {
         if (this.root != null) {
             Queue<Node<K,T>> queue = new Queue<Node<K, T>>();
             queue.enqueue(this.root);

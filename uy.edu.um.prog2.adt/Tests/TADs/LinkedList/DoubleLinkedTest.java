@@ -7,36 +7,40 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DoubleLinkedTest {
-    DoubleLinked<String> linkedList = new DoubleLinked<>();
-    Node<String> test1 = new Node<>("Prueba");
-    Node<String> test2 = new Node<>("Prueba2");
-    Node<String> test3 = new Node<>("Prueba3");
+    DoubleLinked<Object> linkedList = new DoubleLinked<>();
+    Node<Object> test1 = new Node<>("Prueba");
+    Node<Object> test2 = new Node<>("Prueba2");
+    Node<Object> test3 = new Node<>("Prueba3");
+    Node<Object> test4 = new Node<>(2);
     @Test
     public void testAdd() throws EmptyList, InvalidIndex {
-        linkedList.addFirst("Prueba");
-        linkedList.addLast("Prueba2");
-        linkedList.addFirst("Prueba3");
+        linkedList.addFirst(test1.getValue());
+        linkedList.addLast(test2.getValue());
+        linkedList.addFirst(test3.getValue());
+        linkedList.addLast(test4.getValue());
         int tamano = linkedList.size();
-        String value1 = linkedList.get(0);
-        assertEquals(3, tamano);
+        Object value1 = linkedList.get(0);
+        assertEquals(4, tamano);
         assertEquals(value1,test3.getValue());
     }
     @Test
     public void testRemoveValue() throws EmptyList {
-        linkedList.addFirst("Prueba");
-        linkedList.addLast("Prueba2");
-        linkedList.addFirst("Prueba3");
+        linkedList.addFirst(test1.getValue());
+        linkedList.addLast(test2.getValue());
+        linkedList.addFirst(test3.getValue());
+        linkedList.addLast(test4.getValue());
         int tamano = linkedList.size();
-        linkedList.removeValue("Prueba2");
+        linkedList.removeValue(test2.getValue());
         int tamano_final = linkedList.size();
         assertNotEquals(tamano, tamano_final);
     }
 
     @Test
     public void testRemovePosition() throws EmptyList, InvalidIndex {
-        linkedList.addFirst("Prueba");
-        linkedList.addLast("Prueba2");
-        linkedList.addFirst("Prueba3");
+        linkedList.addFirst(test1.getValue());
+        linkedList.addLast(test2.getValue());
+        linkedList.addFirst(test3.getValue());
+        linkedList.addLast(test4.getValue());
         int tamano = linkedList.size();
         linkedList.removePosition(0);
         int tamano_final = linkedList.size();

@@ -115,7 +115,6 @@ public class CircularList<T> implements MyList<T> {
         int size = 0;
         if (this.access != null) {
             Node<T> temp = this.access;
-            size++;
             while (temp.getNext() != this.access) {
                 temp = temp.getNext();
                 size++;

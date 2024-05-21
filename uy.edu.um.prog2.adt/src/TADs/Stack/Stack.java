@@ -31,15 +31,19 @@ public class Stack<T> implements MyStack<T> {
     }
 
     @Override
-    public void pop() {
+    public void pop() throws EmptyStack{
         Node<T> pop = null;
-        if (this.base != null && this.base.getNext() != null) {
-            pop = this.top;
-            this.top = this.top.getPrevious();
-            this.top.setNext(null);
-        } else if (this.base != null && this.base.getNext() == null) {
-            pop = this.base;
-            this.base = null;
+        if (this.base != null) {
+            if (this.base.getNext() != null) {
+                pop = this.top;
+                this.top = this.top.getPrevious();
+                this.top.setNext(null);
+            } else if (this.base.getNext() == null) {
+                pop = this.base;
+                this.base = null;
+            }
+        } else {
+            throw new EmptyStack();
         }
     }
 

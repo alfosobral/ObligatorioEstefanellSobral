@@ -1,5 +1,6 @@
 package TADs.Tree;
 
+import TADs.LinkedList.Exceptions.EmptyList;
 import TADs.Tree.Exceptions.EmptyTree;
 import TADs.Tree.Exceptions.InvalidKey;
 public interface MyTree<K, T> {
@@ -11,5 +12,5 @@ public interface MyTree<K, T> {
 
     void addNode(Node<K, T> add) throws InvalidKey;
 
-    public void delete(K key) throws InvalidKey, EmptyTree;
+    public void delete(K key) throws InvalidKey, EmptyTree, EmptyList;
 }

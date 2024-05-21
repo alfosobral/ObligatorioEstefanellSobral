@@ -24,7 +24,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public T get(int position) {
+    public T get(int position) throws InvalidIndex, EmptyList{
         int tempPos = 0;
         T val = null;
         if (this.first != null) {
@@ -36,7 +36,11 @@ public class DoubleLinked<T> implements MyList<T> {
             }
             if (tempPos == position) {
                 val = temp.getValue();
+            } else {
+                throw new InvalidIndex();
             }
+        } else {
+            throw new EmptyList();
         }
         return val;
     }
@@ -57,7 +61,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public void removeValue(T value) {
+    public void removeValue(T value) throws EmptyList{
         if (this.first != null) {
             if (!this.first.getValue().equals(value)) {
                 Node<T> temp = this.first;
@@ -76,18 +80,21 @@ public class DoubleLinked<T> implements MyList<T> {
             } else {
                 this.first = null;
             }
+        } else {
+            throw new EmptyList();
         }
 
     }
 
     @Override
-    public void removePosition(int pos) throws InvalidIndex{
+    public void removePosition(int pos) throws InvalidIndex, EmptyList{
         if (this.first != null) {
             int contador = 1;
             if (pos != 1) {
                 Node<T> temp = this.first;
                 while (temp.getNext() != null && contador != pos) {
                     temp = temp.getNext();
+                    contador++;
                 }
                 if (contador == pos && temp.getNext() != null) {
                     temp.getPrevious().setNext(temp.getNext());
@@ -103,13 +110,15 @@ public class DoubleLinked<T> implements MyList<T> {
             } else {
                 this.first = null;
             }
+        } else {
+            throw new EmptyList();
         }
 
     }
 
 
     @Override
-    public int size() throws EmptyList {
+    public int size() {
         int size = 0;
         if (this.first != null) {
             Node<T> temp = this.first;
@@ -118,8 +127,6 @@ public class DoubleLinked<T> implements MyList<T> {
                 temp = temp.getNext();
                 size++;
             }
-        } else {
-            throw new EmptyList();
         }
         return size;
     }
@@ -140,14 +147,16 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public void printList() {
+    public void printList() throws EmptyList{
         if (this.first != null) {
             Node<T> temp = this.first;
-            System.out.println(temp.getValue() + "(first)");
+            System.out.println(temp.getValue());
             while (temp.getNext() != null) {
                 temp = temp.getNext();
                 System.out.println(temp.getValue());
             }
+        } else {
+            throw new EmptyList();
         }
     }
 

@@ -22,32 +22,24 @@ public class LinkedList<T> implements MyList<T> {
             this.first = aux;                             //seteo el ultimo nodo para que ahora sea el que agregamos
         }
     }
-
     @Override
-    public void add(T value) {
-        Node<T> add = new Node<>(value);
-        if (first == null) {
-            first = add;
-        } else {
-            Node<T> temp = first;
-            while (temp.getNext() != null) {
+    public T get(int position) throws InvalidIndex, EmptyList{
+        T valueToReturn = null;
+        int tempPosition = 0;
+        if (this.first != null) {
+            Node<T> temp = this.first;
+
+            while (temp != null && tempPosition != position) {
                 temp = temp.getNext();
+                tempPosition++;
             }
-            temp.setNext(add);
-        }
-    }
-    @Override
-    public T get(int position) {
-        T valueToReturn = null;                      //primero seteo el valor a devolver como null
-        int tempPosition = 0;                             //inicializo la variable posicion en 0
-        Node<T> temp = this.first;                           //me creo un nodo temporal, inicializado como el primero de la lista
-
-        while (temp != null && tempPosition != position) {      //chaqueo mientras el temporal no sea null ni llegue a la posicion que le paso como parametro
-            temp = temp.getNext();                              //muevo el temp al siguiente en la lista
-            tempPosition++;                                     //la posicion tambien se mueve
-        }
-        if (tempPosition == position) {                         //cuando llegue a la posicion que le paso
-            valueToReturn = temp.getValue();                    //me quedo con el valor de ese nodo
+            if (tempPosition == position) {
+                valueToReturn = temp.getValue();
+            } else {
+                throw new InvalidIndex();
+            }
+        } else {
+            throw new EmptyList();
         }
         return valueToReturn;
     }
@@ -131,10 +123,10 @@ public class LinkedList<T> implements MyList<T> {
 
 
     @Override
-    public int size() throws EmptyList {
-        Node<T> temp = this.first;                                     //Inicializo el nodo temp como el primero de la lista
-        int size = 0;                                               //Inicializo size en 0
-        if (temp != null) {                                         //chequeo que temp no arranque siendo null
+    public int size() {
+        int size = 0;
+        if (this.first != null) {
+            Node<T> temp = this.first;
             if (temp == this.first && temp == this.last) {          //si el temp es al mismo tiempo el primer nodo y el ultimo
                 size = 1;                                           //la lista tiene un elemento => size = 1
             } else {                                                //sino
@@ -143,7 +135,6 @@ public class LinkedList<T> implements MyList<T> {
                     size++;                                         //size aumenta en 1
                 }
             }
-        } else {                                                    //si temp arranca en null significa q la lista esta vacia
         }
         return size;
     }
@@ -164,12 +155,16 @@ public class LinkedList<T> implements MyList<T> {
     }
 
     @Override
-    public void printList() {
-        Node<T> temp = this.first;
-        do {
-            System.out.println(temp.getValue());
-            temp = temp.getNext();
-        } while (temp != null);
+    public void printList() throws EmptyList {
+        if (this.first != null) {
+            Node<T> temp = this.first;
+            do {
+                System.out.println(temp.getValue());
+                temp = temp.getNext();
+            } while (temp != null);
+        } else {
+            throw new EmptyList();
+        }
     }
 }
 

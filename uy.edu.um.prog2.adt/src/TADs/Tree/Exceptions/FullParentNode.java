@@ -1,4 +1,4 @@
-package Tree.Exceptions;
+package TADs.Tree.Exceptions;
 
 public class FullParentNode extends Exception{
 }

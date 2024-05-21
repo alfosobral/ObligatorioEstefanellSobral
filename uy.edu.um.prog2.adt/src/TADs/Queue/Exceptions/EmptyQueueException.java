@@ -1,4 +1,4 @@
-package Queue.Exceptions;
+package TADs.Queue.Exceptions;
 
 public class EmptyQueueException extends Exception{
 }

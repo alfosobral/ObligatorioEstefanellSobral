@@ -1,4 +1,4 @@
-package Queue;
+package TADs.LinkedList;
 
 import java.util.Arrays;
 
@@ -55,7 +55,4 @@ public class Node<T> implements Comparable<Node<T>> {
         }
         return salida;
     }
-
-
 }
-

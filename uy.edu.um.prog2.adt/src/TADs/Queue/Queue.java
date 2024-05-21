@@ -1,8 +1,10 @@
-package Queue;
+package TADs.Queue;
 
-import Queue.Exceptions.EmptyQueueException;
+import TADs.Queue.Exceptions.EmptyQueueException;
+import TADs.Queue.MyQueue;
+import TADs.Queue.Node;
 
-public class Queue<T> implements MyQueue<T>{
+public class Queue<T> implements MyQueue<T> {
 
     private Node<T> first;                      // First es el nodo que llego primero a la fila, o sea, todos los nodos que agregue van atras del first: A - B - C - ... - First
     private Node<T> last;                       // Last es el nodo que recien llego a la fila: Last - A - B - ... - First

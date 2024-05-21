@@ -1,6 +1,6 @@
-package Stack;
+package TADs.Stack;
 
-import Stack.Exceptions.EmptyStack;
+import TADs.Stack.Exceptions.EmptyStack;
 
 public class Stack<T> implements MyStack<T> {
     private Node<T> top;

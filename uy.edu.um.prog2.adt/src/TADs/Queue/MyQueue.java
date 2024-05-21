@@ -1,6 +1,6 @@
-package Queue;
+package TADs.Queue;
 
-import Queue.Exceptions.EmptyQueueException;
+import TADs.Queue.Exceptions.EmptyQueueException;
 
 public interface MyQueue<T> {
     void enqueue(T value);

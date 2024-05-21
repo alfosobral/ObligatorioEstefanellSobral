@@ -1,7 +1,7 @@
-package LinkedList;
+package TADs.LinkedList;
 
-import LinkedList.Exceptions.EmptyList;
-import LinkedList.Exceptions.InvalidIndex;
+import TADs.LinkedList.Exceptions.EmptyList;
+import TADs.LinkedList.Exceptions.InvalidIndex;
 
 public class DoubleLinked<T> implements MyList<T> {
 
@@ -24,7 +24,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public T get(int position) {
+    public T get(int position) throws InvalidIndex {
         int tempPos = 0;
         T val = null;
         if (this.first != null) {
@@ -57,7 +57,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public void removeValue(T value) {
+    public void removeValue(T value) throws EmptyList{
         if (this.first != null) {
             if (!this.first.getValue().equals(value)) {
                 Node<T> temp = this.first;
@@ -81,7 +81,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public void removePosition(int pos) throws InvalidIndex{
+    public void removePosition(int pos) throws InvalidIndex, EmptyList{
         if (this.first != null) {
             int contador = 1;
             if (pos != 1) {
@@ -109,7 +109,7 @@ public class DoubleLinked<T> implements MyList<T> {
 
 
     @Override
-    public int size() throws EmptyList {
+    public int size() {
         int size = 0;
         if (this.first != null) {
             Node<T> temp = this.first;
@@ -118,8 +118,6 @@ public class DoubleLinked<T> implements MyList<T> {
                 temp = temp.getNext();
                 size++;
             }
-        } else {
-            throw new EmptyList();
         }
         return size;
     }

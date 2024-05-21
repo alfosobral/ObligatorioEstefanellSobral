@@ -1,8 +1,8 @@
-package Tree;
+package TADs.Tree;
 
-import Tree.Exceptions.InvalidKey;
-import LinkedList.LinkedList;
-import Queue.Queue;
+import TADs.Tree.Exceptions.InvalidKey;
+import TADs.LinkedList.LinkedList;
+import TADs.Queue.Queue;
 public class Node<K,T> implements Comparable<K>{
     private T data;
     private K key;

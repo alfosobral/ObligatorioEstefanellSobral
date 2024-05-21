@@ -1,9 +1,9 @@
-package Tree;
+package TADs.Tree;
 
-import LinkedList.LinkedList;
-import Queue.Queue;
-import Tree.Exceptions.EmptyTree;
-import Tree.Exceptions.InvalidKey;
+import TADs.LinkedList.LinkedList;
+import TADs.Queue.Queue;
+import TADs.Tree.Exceptions.EmptyTree;
+import TADs.Tree.Exceptions.InvalidKey;
 
 
 

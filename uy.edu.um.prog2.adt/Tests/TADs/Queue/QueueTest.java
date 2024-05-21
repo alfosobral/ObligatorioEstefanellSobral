@@ -34,6 +34,7 @@ class QueueTest {
         queue.enqueue(test4.getValue());
         int size = queue.getSize();
         Object value1 = queue.dequeue().getValue();
-        queue.enqueue(value1);
+        assertEquals(4,size);
+        assertFalse(queue.contains(test1.getValue()));
     }
 }

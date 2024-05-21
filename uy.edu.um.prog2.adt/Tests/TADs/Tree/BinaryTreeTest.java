@@ -1,8 +1,8 @@
-package TADs.Stack;
+package TADs.Tree;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StackTest {
+class BinaryTreeTest {
 
 
 }

@@ -2,11 +2,11 @@ package TADs.Stack;
 
 import TADs.Stack.Exceptions.EmptyStack;
 
-public class Stack<T> implements MyStack<T> {
+public class STACK<T> implements MyStack<T> {
     private Node<T> top;
     private Node<T> base;
 
-    public Stack() {
+    public STACK() {
         this.base = null;
         this.top = null;
     }

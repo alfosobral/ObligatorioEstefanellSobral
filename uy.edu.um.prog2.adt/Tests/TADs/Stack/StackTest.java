@@ -1,12 +1,11 @@
 package TADs.Stack;
 import TADs.Stack.Exceptions.EmptyStack;
-import TADs.Stack.Stack;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StackTest {
-    Stack<Object> stack = new Stack<>();
+    STACK<Object> stack = new STACK<>();
     Node<Object> test1 = new Node<>("Prueba");
     Node<Object> test2 = new Node<>("Prueba2");
     Node<Object> test3 = new Node<>("Prueba3");

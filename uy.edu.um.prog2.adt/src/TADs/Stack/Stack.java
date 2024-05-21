@@ -69,6 +69,19 @@ public class Stack<T> implements MyStack<T> {
         }
         return size;
     }
+    public boolean contains(T value){
+        boolean contains = false;
+        if (this.base != null) {
+            Node<T> temp = this.base;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+                if (temp.getValue().equals(value)) {
+                    contains = true;
+                }
+            }
+        }
+        return contains;
+    }
 
     @Override
     public void printStack() throws EmptyStack{
@@ -99,6 +112,7 @@ public class Stack<T> implements MyStack<T> {
                 this.pop();
             }
             this.top = null;
+            this.base = null;
         }
     }
 

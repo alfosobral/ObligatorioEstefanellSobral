@@ -59,10 +59,9 @@ public class Queue<T> implements MyQueue<T>{
             size = 1;
             Node<T> temp = this.last;
             while (temp.getNext() != null) {
-                size++;
                 temp = temp.getNext();
+                size++;
             }
-            size++;
         }
         return size;
     }

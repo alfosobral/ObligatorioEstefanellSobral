@@ -1,4 +1,7 @@
 package TADs.Queue;
+
+import TADs.Queue.Exceptions.EmptyQueue;
+
 public class Queue<T> implements MyQueue<T>{
 
     private Node<T> first;                      // First es el nodo que llego primero a la fila, o sea, todos los nodos que agregue van atras del first: A - B - C - ... - First
@@ -20,7 +23,7 @@ public class Queue<T> implements MyQueue<T>{
     }
 
     @Override
-    public Node<T> dequeue() {
+    public Node<T> dequeue() throws EmptyQueue {
         Node<T> l = null;
         if (this.last != null) {                                //Chequeo que el last no sea null
             l = this.last;
@@ -31,11 +34,13 @@ public class Queue<T> implements MyQueue<T>{
                 this.last = null;
                 this.first = null;
             }
+        } else {
+            throw new EmptyQueue();
         }
         return l;
     }
 
-    public void printQueue() {
+    public void printQueue() throws EmptyQueue{
         if (this.last != null) {
             Node<T> temp = this.last;
             System.out.println(temp.getValue() + " L");
@@ -43,6 +48,8 @@ public class Queue<T> implements MyQueue<T>{
                 temp = temp.getNext();
                 System.out.println(temp.getValue());
             }
+        } else {
+            throw new EmptyQueue();
         }
     }
 

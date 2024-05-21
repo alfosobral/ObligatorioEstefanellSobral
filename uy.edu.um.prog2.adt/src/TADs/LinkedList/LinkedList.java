@@ -92,11 +92,11 @@ public class LinkedList<T> implements MyList<T> {
             Node<T> anterior = null;                                           //debo llevar registro tanto del nodo que estoy parado,como del anterior
             if (this.first != null) {
                 Node<T> este = this.first;
-                int contador = 1;
-
+                int contador = 0;
                 while (este != null && contador != pos) {         //mientras el Nodo en el que estoy no sea null y sea distinto al valor del parametro
                     anterior = este;                                            //el anterior pasa a ser el que estoy ahora
-                    este = este.getNext();                                      //y me paro en el siguiente
+                    este = este.getNext();
+                    contador++;                                                    //y me paro en el siguiente
                 }
                 if (este != null) {                                             //sali del while y encontre la posicion
                     if (este == this.first && este != this.last) {              //chequeo a ver si el nodo en que estoy parado es el primero y NO el ultimo

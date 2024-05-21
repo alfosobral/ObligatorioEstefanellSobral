@@ -27,10 +27,13 @@ public class DoubleLinked<T> implements MyList<T> {
     public T get(int position) throws InvalidIndex, EmptyList{
         int tempPos = 0;
         T val = null;
+        if (tempPos == position && this.first != null){
+            return this.first.getValue();
+        }
         if (this.first != null) {
             Node<T> temp = this.first;
             tempPos = 1;
-            while (temp.getNext() != null && tempPos < position) {
+            while (temp.getNext() != null && tempPos != position) {
                 temp = temp.getNext();
                 tempPos++;
             }
@@ -89,8 +92,12 @@ public class DoubleLinked<T> implements MyList<T> {
     @Override
     public void removePosition(int pos) throws InvalidIndex, EmptyList{
         if (this.first != null) {
-            int contador = 1;
-            if (pos != 1) {
+            int contador = 0;
+            if (contador == pos){
+                Node<T> aux = this.first;
+                aux.getNext().setPrevious(aux.getNext());
+            }
+            if (pos != 1 && pos != 0) {
                 Node<T> temp = this.first;
                 while (temp.getNext() != null && contador != pos) {
                     temp = temp.getNext();
@@ -104,7 +111,7 @@ public class DoubleLinked<T> implements MyList<T> {
                 } else {
                     throw new InvalidIndex();
                 }
-            } else if (pos == 1 && this.first.getNext() != null) {
+            } else if (this.first.getNext() != null) {
                 this.first = this.first.getNext();
                 this.first.setPrevious(null);
             } else {

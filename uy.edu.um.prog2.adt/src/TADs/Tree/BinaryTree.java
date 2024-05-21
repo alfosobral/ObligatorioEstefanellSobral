@@ -1,6 +1,7 @@
 package TADs.Tree;
 
 import TADs.LinkedList.Exceptions.EmptyList;
+import TADs.LinkedList.Exceptions.InvalidIndex;
 import TADs.LinkedList.LinkedList;
 import TADs.Queue.Queue;
 import TADs.Tree.Exceptions.EmptyTree;
@@ -69,7 +70,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     }
 
     @Override
-    public void delete(K key) throws InvalidKey, EmptyTree, EmptyList {
+    public void delete(K key) throws InvalidKey, EmptyTree, EmptyList, InvalidIndex {
         if (this.root != null) {
             Node<K,T> del = this.SerchNode(key);
             Node<K,T> parent = this.root.findParent(key);
@@ -91,7 +92,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
         }
     }
 
-    public void inOrder() throws EmptyTree{
+    public void inOrder() throws EmptyTree, EmptyList, InvalidIndex {
         LinkedList<T> list = new LinkedList<T>();
         if (this.root != null) {
             this.root.inOrder(list);
@@ -107,7 +108,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
             }
         }
     }
-    public void preOrder() throws EmptyTree{
+    public void preOrder() throws EmptyTree, EmptyList, InvalidIndex {
         LinkedList<T> list = new LinkedList<T>();
         if (this.root != null) {
             this.root.preOrder(list);
@@ -123,7 +124,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
             }
         }
     }
-    public void postOrder() throws EmptyTree{
+    public void postOrder() throws EmptyTree, EmptyList, InvalidIndex {
         LinkedList<T> list = new LinkedList<T>();
         if (this.root != null) {
             this.root.postOrder(list);
@@ -140,7 +141,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
         }
     }
 
-    public Node<K,T> getMax() throws EmptyTree {
+    public Node<K,T> getMax() throws EmptyTree, EmptyList, InvalidIndex {
         Node<K,T> maximum;
         if (this.root != null) {
             LinkedList<Node<K,T>> list = new LinkedList<Node<K,T>>();
@@ -157,7 +158,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
         return maximum;
     }
 
-    public Node<K,T> getMin() throws EmptyTree {
+    public Node<K,T> getMin() throws EmptyTree, EmptyList, InvalidIndex {
         Node<K,T> minimum;
         if (this.root != null) {
             LinkedList<Node<K,T>> list = new LinkedList<Node<K,T>>();

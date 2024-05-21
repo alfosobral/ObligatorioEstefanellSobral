@@ -35,6 +35,8 @@ public class CircularList<T> implements MyList<T> {
             }
             if (tempPos == position) {
                 valueToReturn = temp.getValue();
+            } else {
+                throw new InvalidIndex();
             }
         } else {
             throw new EmptyList();
@@ -96,8 +98,6 @@ public class CircularList<T> implements MyList<T> {
                     Node<T> sig = temp.getNext();
                     ant.setNext(sig);
                     sig.setPrevious(ant);
-                } else {
-                    throw new InvalidIndex();
                 }
             } else {
                 Node<T> aux = this.access.getPrevious();

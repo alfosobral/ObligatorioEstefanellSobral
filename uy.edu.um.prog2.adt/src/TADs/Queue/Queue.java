@@ -66,6 +66,22 @@ public class Queue<T> implements MyQueue<T>{
         return size;
     }
 
+    public boolean contains(T value) throws EmptyQueue{
+        boolean contains = false;
+        if (this.last != null) {
+            Node<T> temp = this.last;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+                if (temp.getValue().equals(value)) {
+                    contains = true;
+                }
+            }
+        } else {
+            throw new EmptyQueue();
+        }
+        return contains;
+    }
+
     public void printFirst() {
         System.out.println(this.first.getValue());
     }

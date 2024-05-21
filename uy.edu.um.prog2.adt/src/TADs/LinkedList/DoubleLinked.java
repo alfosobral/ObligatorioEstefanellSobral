@@ -24,7 +24,7 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public T get(int position) throws InvalidIndex {
+    public T get(int position) throws InvalidIndex, EmptyList{
         int tempPos = 0;
         T val = null;
         if (this.first != null) {
@@ -36,7 +36,11 @@ public class DoubleLinked<T> implements MyList<T> {
             }
             if (tempPos == position) {
                 val = temp.getValue();
+            } else {
+                throw new InvalidIndex();
             }
+        } else {
+            throw new EmptyList();
         }
         return val;
     }
@@ -76,6 +80,8 @@ public class DoubleLinked<T> implements MyList<T> {
             } else {
                 this.first = null;
             }
+        } else {
+            throw new EmptyList();
         }
 
     }
@@ -88,6 +94,7 @@ public class DoubleLinked<T> implements MyList<T> {
                 Node<T> temp = this.first;
                 while (temp.getNext() != null && contador != pos) {
                     temp = temp.getNext();
+                    contador++;
                 }
                 if (contador == pos && temp.getNext() != null) {
                     temp.getPrevious().setNext(temp.getNext());
@@ -103,6 +110,8 @@ public class DoubleLinked<T> implements MyList<T> {
             } else {
                 this.first = null;
             }
+        } else {
+            throw new EmptyList();
         }
 
     }
@@ -138,14 +147,16 @@ public class DoubleLinked<T> implements MyList<T> {
     }
 
     @Override
-    public void printList() {
+    public void printList() throws EmptyList{
         if (this.first != null) {
             Node<T> temp = this.first;
-            System.out.println(temp.getValue() + "(first)");
+            System.out.println(temp.getValue());
             while (temp.getNext() != null) {
                 temp = temp.getNext();
                 System.out.println(temp.getValue());
             }
+        } else {
+            throw new EmptyList();
         }
     }
 

@@ -24,16 +24,20 @@ public class CircularList<T> implements MyList<T> {
         }
     }
     @Override
-    public T get(int position) {
+    public T get(int position) throws InvalidIndex, EmptyList{
         T valueToReturn = null;
-        Node<T> temp = this.access;
-        int tempPos = 0;
-        while (temp.getNext() != this.access && tempPos != position) {
-            temp = temp.getNext();
-            tempPos++;
-        }
-        if (tempPos == position) {
-            valueToReturn = temp.getValue();
+        if (this.access != null) {
+            Node<T> temp = this.access;
+            int tempPos = 0;
+            while (temp.getNext() != this.access && tempPos != position) {
+                temp = temp.getNext();
+                tempPos++;
+            }
+            if (tempPos == position) {
+                valueToReturn = temp.getValue();
+            }
+        } else {
+            throw new EmptyList();
         }
         return valueToReturn;
     }
@@ -54,36 +58,14 @@ public class CircularList<T> implements MyList<T> {
     }
 
     @Override
-    public void removeValue(T value) {
-        Node<T> temp = this.access;
-        if (!this.access.getValue().equals(value)) {
-            while (temp.getNext() != this.access && !temp.getValue().equals(value)) {
-                temp = temp.getNext();
-            }
-            if (temp.getValue().equals(value)) {
-                Node<T> ant = temp.getPrevious();
-                Node<T> sig = temp.getNext();
-                ant.setNext(sig);
-                sig.setPrevious(ant);
-            }
-        } else {
-            Node<T> aux = this.access.getPrevious();
-            aux.setNext(this.access.getNext());
-            this.access = this.access.getNext();
-            this.access.setPrevious(aux);
-        }
-    }
-
-    @Override
-    public void removePosition(int pos) throws InvalidIndex, EmptyList {
+    public void removeValue(T value) throws EmptyList{
         if (this.access != null) {
             Node<T> temp = this.access;
-            int contador = 1;
-            if (pos != 1) {
-                while (temp.getNext() != this.access && contador != pos) {
+            if (!this.access.getValue().equals(value)) {
+                while (temp.getNext() != this.access && !temp.getValue().equals(value)) {
                     temp = temp.getNext();
                 }
-                if (contador == pos) {
+                if (temp.getValue().equals(value)) {
                     Node<T> ant = temp.getPrevious();
                     Node<T> sig = temp.getNext();
                     ant.setNext(sig);
@@ -101,7 +83,35 @@ public class CircularList<T> implements MyList<T> {
     }
 
     @Override
-    public int size() throws EmptyList {
+    public void removePosition(int pos) throws InvalidIndex, EmptyList {
+        if (this.access != null) {
+            Node<T> temp = this.access;
+            int contador = 1;
+            if (pos != 1) {
+                while (temp.getNext() != this.access && contador != pos) {
+                    temp = temp.getNext();
+                }
+                if (contador == pos) {
+                    Node<T> ant = temp.getPrevious();
+                    Node<T> sig = temp.getNext();
+                    ant.setNext(sig);
+                    sig.setPrevious(ant);
+                } else {
+                    throw new InvalidIndex();
+                }
+            } else {
+                Node<T> aux = this.access.getPrevious();
+                aux.setNext(this.access.getNext());
+                this.access = this.access.getNext();
+                this.access.setPrevious(aux);
+            }
+        } else {
+            throw new EmptyList();
+        }
+    }
+
+    @Override
+    public int size(){
         int size = 0;
         if (this.access != null) {
             Node<T> temp = this.access;
@@ -110,8 +120,6 @@ public class CircularList<T> implements MyList<T> {
                 temp = temp.getNext();
                 size++;
             }
-        } else {
-            throw new EmptyList();
         }
         return size;
     }

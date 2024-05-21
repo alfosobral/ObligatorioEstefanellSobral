@@ -1,5 +1,6 @@
 package TADs.Tree;
 
+import TADs.LinkedList.Exceptions.EmptyList;
 import TADs.LinkedList.LinkedList;
 import TADs.Queue.Queue;
 import TADs.Tree.Exceptions.EmptyTree;
@@ -68,7 +69,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     }
 
     @Override
-    public void delete(K key) throws InvalidKey, EmptyTree{
+    public void delete(K key) throws InvalidKey, EmptyTree, EmptyList {
         if (this.root != null) {
             Node<K,T> del = this.SerchNode(key);
             Node<K,T> parent = this.root.findParent(key);

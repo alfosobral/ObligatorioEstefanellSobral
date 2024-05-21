@@ -28,7 +28,6 @@ public class LinkedList<T> implements MyList<T> {
         int tempPosition = 0;
         if (this.first != null) {
             Node<T> temp = this.first;
-
             while (temp != null && tempPosition != position) {
                 temp = temp.getNext();
                 tempPosition++;
@@ -127,6 +126,7 @@ public class LinkedList<T> implements MyList<T> {
         int size = 0;
         if (this.first != null) {
             Node<T> temp = this.first;
+            size++;
             if (temp == this.first && temp == this.last) {          //si el temp es al mismo tiempo el primer nodo y el ultimo
                 size = 1;                                           //la lista tiene un elemento => size = 1
             } else {                                                //sino

@@ -5,9 +5,9 @@ import TADs.LinkedList.Exceptions.InvalidIndex;
 import TADs.Tree.Exceptions.EmptyTree;
 import TADs.Tree.Exceptions.InvalidKey;
 public interface MyTree<K, T> {
-    public T Serch(K key) throws EmptyTree, InvalidKey;
+    public T serch(K key) throws EmptyTree, InvalidKey;
 
-    Node<K, T> SerchNode(K key) throws EmptyTree, InvalidKey;
+    Node<K, T> serchNode(K key) throws EmptyTree, InvalidKey;
 
     public void add(K key, T data) throws InvalidKey;
 

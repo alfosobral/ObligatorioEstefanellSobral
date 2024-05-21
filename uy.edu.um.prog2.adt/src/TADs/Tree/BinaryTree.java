@@ -19,7 +19,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     }
 
     @Override
-    public T Serch(K key) throws EmptyTree, InvalidKey {
+    public T serch(K key) throws EmptyTree, InvalidKey {
         Node<K,T> res;
         if (this.root != null) {
             res = this.root.findNode(key);
@@ -30,7 +30,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     }
 
     @Override
-    public Node<K,T> SerchNode(K key) throws EmptyTree, InvalidKey {
+    public Node<K,T> serchNode(K key) throws EmptyTree, InvalidKey {
         Node<K,T> res;
         if (this.root != null) {
             res = this.root.findNode(key);
@@ -73,7 +73,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     @Override
     public void delete(K key) throws InvalidKey, EmptyTree, EmptyList, InvalidIndex {
         if (this.root != null) {
-            Node<K,T> del = this.SerchNode(key);
+            Node<K,T> del = this.serchNode(key);
             Node<K,T> parent = this.root.findParent(key);
             if (parent.getLeftChild() == del) {
                 parent.setLeftChild(null);

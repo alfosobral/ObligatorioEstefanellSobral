@@ -13,13 +13,13 @@ class LinkedListTest {
     Node<String> test3 = new Node<>("Prueba3");
     @Test
     public void testAdd() throws EmptyList, InvalidIndex {
-        linkedList.addFirst("Pruena");
+        linkedList.addFirst("Prueba");
         linkedList.addLast("Prueba2");
         linkedList.addFirst("Prueba3");
         int tamano = linkedList.size();
         String value1 = linkedList.get(0);
         assertEquals(3, tamano);
-        assertTrue(value1 == test3.getValue());
+        assertEquals(value1, test3.getValue());
 
     }
     @Test
@@ -39,10 +39,9 @@ class LinkedListTest {
         linkedList.addLast("Prueba2");
         linkedList.addFirst("Prueba3");
         int tamano = linkedList.size();
-        linkedList.removePosition(1);
+        linkedList.removePosition(0);
         int tamano_final = linkedList.size();
         assertNotEquals(tamano, tamano_final);
     }
-
 }
 

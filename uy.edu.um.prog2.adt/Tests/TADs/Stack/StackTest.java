@@ -67,5 +67,7 @@ class StackTest {
         stack.push(test3.getValue());
         stack.push(test4.getValue());
         assertTrue(stack.contains(test3.getValue()));
+        stack.makeEmpty();
+        assertThrows(EmptyStack.class, ()->{stack.pop();});
     }
 }

@@ -24,7 +24,9 @@ class QueueTest {
         queue.enqueue(value1);
         assertEquals(4,size);
         assertEquals(value1, test4.getValue());
+
     }
+
 
     @Test
     public void testDequeue() throws EmptyQueue {

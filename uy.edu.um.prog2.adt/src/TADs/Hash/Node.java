@@ -1,35 +1,22 @@
 package TADs.Hash;
 
-public class Node<T> {
+public class Node<K, T> {
     private T value;
-    private Node<T> next;
-    private Node<T> previous;
+    private K key;
 
-    public Node(T value) {
+    public Node(K key, T value) {
         this.value = value;
-        this.next = null;
-        this.previous = null;
+        this.key = key;
     }
-
     public T getValue() {
         return value;
     }
 
-    public Node<T> getNext() {
-        return next;
+    public K getKey() {
+        return key;
     }
 
-    public void setNext(Node<T> next) {
-        this.next = next;
-    }
 
-    public void setPrevious(Node<T> previous) {
-        this.previous = previous;
-    }
-
-    public Node<T> getPrevious() {
-        return this.previous;
-    }
 
 
 }

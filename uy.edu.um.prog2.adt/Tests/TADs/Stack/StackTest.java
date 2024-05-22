@@ -32,6 +32,8 @@ class StackTest {
         stack.pop();
         size = stack.size();
         assertEquals(3, size);
+        stack.makeEmpty();
+        assertThrows(EmptyStack.class, ()->{stack.pop();});
     }
 
     @Test
@@ -45,6 +47,8 @@ class StackTest {
         stack.pop();
         Object peek = stack.peek().getValue();
         assertEquals(peek, test3.getValue());
+        stack.makeEmpty();
+        assertThrows(EmptyStack.class, ()->{stack.peek();});
     }
 
     @Test
@@ -67,7 +71,5 @@ class StackTest {
         stack.push(test3.getValue());
         stack.push(test4.getValue());
         assertTrue(stack.contains(test3.getValue()));
-        stack.makeEmpty();
-        assertThrows(EmptyStack.class, ()->{stack.pop();});
     }
 }

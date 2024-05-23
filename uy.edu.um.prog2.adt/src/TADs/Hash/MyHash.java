@@ -6,7 +6,18 @@ public interface MyHash<K,T> {
     int hashFunction(K key);
 
     void add(K key, T value);
+
     void remove(K key) throws InvalidHashKey;
 
     T serch(K key) throws InvalidHashKey;
+
+    boolean checkCapacity();
+
+    void reSize();
+
+    void reOrganize(int newSize);
+
+    void printHash();
+
+
 }

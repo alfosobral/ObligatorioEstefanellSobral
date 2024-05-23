@@ -49,11 +49,9 @@ public class Hash<T, K> implements MyHash<K, T>{
             this.reSize();
         }
         int index = this.hashFunction(key);
-        System.out.println("The index is " + index + " for the element " + value + " " + key);
         if (this.array[index] != null) {
             do {
                 index = (index+1)%size;
-                System.out.println("A colision ocurred in index " + (index - 1) + ". " + "New index is " + index);
             }
             while (this.array[index] != null);
         }
@@ -95,7 +93,6 @@ public class Hash<T, K> implements MyHash<K, T>{
     public T serch(K key) throws InvalidHashKey {
         T value;
         int index = this.hashFunction(key);
-        System.out.println("Index is " + index + " for " + key);
         int oIndex = index;
         if (array[index] != null) {
             while (!array[index].getKey().equals(key)) {
@@ -111,7 +108,7 @@ public class Hash<T, K> implements MyHash<K, T>{
         return value;
     }
 
-
+    @Override
     public boolean checkCapacity() {
         boolean itsFull = false;
         if (counter >= (int) (size*0.60)) {
@@ -119,6 +116,8 @@ public class Hash<T, K> implements MyHash<K, T>{
         }
         return itsFull;
     }
+
+    @Override
     public void reSize(){
         int n = size*2;
         int p = 0;
@@ -135,10 +134,9 @@ public class Hash<T, K> implements MyHash<K, T>{
             }
         }
         this.reOrganize(p);
-
-
     }
 
+    @Override
     public void reOrganize(int newSize){
         Node<K,T>[] thisArray = this.array;
         Node<K,T>[] cloneHash = new Node[newSize];
@@ -156,8 +154,9 @@ public class Hash<T, K> implements MyHash<K, T>{
                 this.array[index] = thisArray[j];
             }
         }
-        System.out.println("New size is " + size);
     }
+
+    @Override
     public void printHash() {
         for (int i = 0; i < size; i++){
             if (array[i] != null) {

@@ -1,6 +1,7 @@
 package TADs.Hash;
 
 import TADs.Hash.Exceptions.InvalidHashKey;
+import TADs.Stack.Exceptions.EmptyStack;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

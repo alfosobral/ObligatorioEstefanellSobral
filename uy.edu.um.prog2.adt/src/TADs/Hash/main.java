@@ -20,6 +20,10 @@ public class main {
         h.serch("Z");
         System.out.println(" ");
         h.printHash();
+        h.remove("E");
+        h.printHash();
+        h.remove("J");
+        h.printHash();
     }
 
 }

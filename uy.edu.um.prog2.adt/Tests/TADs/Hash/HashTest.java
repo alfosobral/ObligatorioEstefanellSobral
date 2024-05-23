@@ -27,13 +27,24 @@ class HashTest {
         h.add("F", "Prueba6");
         h.add("G", "Prueba7");
         h.add("H", "Prueba8");
-        assertEquals(8, h.getCounter());
+        h.add("Z", "Prueba9");
+        assertEquals(9, h.getCounter());
         assertEquals(23, h.getSize());
     }
 
     @Test
     public void testSerch() throws InvalidHashKey {
+        h.add("A", "Prueba1");
+        h.add("B", "Prueba2");
+        h.add("C", "Prueba3");
+        h.add("D", "Prueba4");
+        h.add("E", "Prueba5");
+        h.add("F", "Prueba6");
+        h.add("G", "Prueba7");
+        h.add("H", "Prueba8");
+        h.add("X", "Prueba9");
         assertEquals("Prueba3", h.serch("C"));
+        assertEquals("Prueba9", h.serch("X"));
         assertThrows(InvalidHashKey.class, ()->{h.remove("J");});
     }
 

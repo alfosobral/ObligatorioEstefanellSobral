@@ -65,9 +65,11 @@ public class Hash<T, K> implements MyHash<K, T>{
             this.reSize();
         }
         int index = this.hashFunction(key);
+        System.out.println("The index is " + index + " for the element " + value + " " + key);
         if (this.array[index] != null) {
             do {
                 index = (index+1)%size;
+                System.out.println("A colision ocurred in index " + (index - 1) + ". " + "New index is " + index);
             }
             while (this.array[index] != null);
         }
@@ -93,14 +95,13 @@ public class Hash<T, K> implements MyHash<K, T>{
 
     @Override
     public T serch(K key) throws InvalidHashKey {
-        T value = null;
+        T value;
         int index = this.hashFunction(key);
+        System.out.println("Index is " + index + " for " + key);
         int oIndex = index;
         if (array[index] != null) {
             while (!array[index].getKey().equals(key)) {
-                do {
-                    index = (index + 1) % size;
-                } while (array[index] != null);
+                index = (index + 1) % size;
                 if (index == oIndex) {
                     throw new InvalidHashKey();
                 }
@@ -135,17 +136,55 @@ public class Hash<T, K> implements MyHash<K, T>{
                 p = n;
             }
         }
-        Node<K,T>[] newHash = new Node[p];
-        for (int i = 0; i < size; i++) {
-            newHash[i] = this.array[i];
-        }
+        Node<K,T>[] thisArray = this.array;
+        Node<K,T>[] cloneHash = new Node[p];
+        this.setArray(cloneHash);
         this.setSize(p);
-        this.setArray(newHash);
+//        Node<K,T>[] newHash = new Node[p];
+//        int index;
+//        for (int i = 0; i < thisArray.length; i++) {
+        for (int j = 0; j<thisArray.length; j++){
+            if (thisArray[j] != null) {
+                int index = this.hashFunction(thisArray[j].getKey());
+                if (this.array[index] != null) {
+                    do {
+                        index = (index + 1) % size;
+                    }
+                    while (this.array[index] != null);
+                }
+                this.array[index] = thisArray[j];
+            }
+        }
+        System.out.println("New size is " + size);
+
+
+
+
+
+
+
+//            if (cloneHash[i] != null){
+//
+//
+//                index = this.hashFunction(cloneHash[i].getKey());
+//                if(newHash[index] != null) {
+//                do {
+//                    index = (index + 1) % size;
+//                    System.out.println("A colision ocurred in index " + (index - 1) + ". " + "New index is " + index);
+//                } while (newHash[index] != null);
+//                newHash[index] = cloneHash[i];
+//
+//                } else {
+//                    newHash[index] = cloneHash[i];
+//                }
+//            }
+
+
     }
     public void printHash() {
         for (int i = 0; i < size; i++){
             if (array[i] != null) {
-            System.out.println(array[i].getValue());
+                System.out.println((String) array[i].getValue() + " " +array[i].getKey());
             } else {
                 System.out.println("-");
             }

@@ -14,21 +14,43 @@ public class CircularList<T> implements MyList<T> {
     public void addFirst(T value) {
         Node<T> add = new Node<>(value);
         if (this.access != null) {
+            add.setPrevious(this.access.getPrevious());
+            this.access.getPrevious().setNext(add);
             add.setNext(this.access);
             this.access.setPrevious(add);
             this.access = add;
         } else {
             this.access = add;
+            this.access.setPrevious(this.access);
+            this.access.setNext(this.access);
+        }
+    }
+
+    @Override
+    public void addLast(T value) {
+        Node<T> add = new Node<>(value);
+        if (this.access != null) {
+            Node<T> temp = this.access;
+            while (temp.getNext() != this.access) {
+                temp = temp.getNext();
+            }
+            temp.setNext(add);
+            add.setPrevious(temp);
+            add.setNext(this.access);
+            this.access.setPrevious(add);
+        } else {
+            this.access = add;
             this.access.setPrevious(add);
             this.access.setNext(add);
         }
+
     }
     @Override
     public T get(int position) throws InvalidIndex, EmptyList{
         T valueToReturn = null;
         if (this.access != null) {
             Node<T> temp = this.access;
-            int tempPos = 0;
+            int tempPos = 1;
             while (temp.getNext() != this.access && tempPos != position) {
                 temp = temp.getNext();
                 tempPos++;
@@ -87,23 +109,28 @@ public class CircularList<T> implements MyList<T> {
     @Override
     public void removePosition(int pos) throws InvalidIndex, EmptyList {
         if (this.access != null) {
-            Node<T> temp = this.access;
-            int contador = 1;
-            if (pos != 1) {
-                while (temp.getNext() != this.access && contador != pos) {
-                    temp = temp.getNext();
-                }
-                if (contador == pos) {
-                    Node<T> ant = temp.getPrevious();
-                    Node<T> sig = temp.getNext();
-                    ant.setNext(sig);
-                    sig.setPrevious(ant);
+            if (0 <= pos && pos <= this.size()) {
+                Node<T> temp = this.access;
+                int contador = 1;
+                if (pos != 1) {
+                    while (temp.getNext() != this.access && contador != pos) {
+                        temp = temp.getNext();
+                        contador++;
+                    }
+                    if (contador == pos) {
+                        Node<T> ant = temp.getPrevious();
+                        Node<T> sig = temp.getNext();
+                        ant.setNext(sig);
+                        sig.setPrevious(ant);
+                    }
+                } else {
+                    Node<T> aux = this.access.getPrevious();
+                    aux.setNext(this.access.getNext());
+                    this.access = this.access.getNext();
+                    this.access.setPrevious(aux);
                 }
             } else {
-                Node<T> aux = this.access.getPrevious();
-                aux.setNext(this.access.getNext());
-                this.access = this.access.getNext();
-                this.access.setPrevious(aux);
+                throw new InvalidIndex();
             }
         } else {
             throw new EmptyList();
@@ -115,6 +142,7 @@ public class CircularList<T> implements MyList<T> {
         int size = 0;
         if (this.access != null) {
             Node<T> temp = this.access;
+            size++;
             while (temp.getNext() != this.access) {
                 temp = temp.getNext();
                 size++;
@@ -123,25 +151,7 @@ public class CircularList<T> implements MyList<T> {
         return size;
     }
 
-    @Override
-    public void addLast(T value) {
-        Node<T> add = new Node<>(value);
-        if (this.access != null) {
-            Node<T> temp = this.access;
-            while (temp.getNext() != this.access) {
-                temp = temp.getNext();
-            }
-            temp.setNext(add);
-            add.setPrevious(temp);
-            add.setNext(this.access);
-            this.access.setPrevious(add);
-        } else {
-            this.access = add;
-            this.access.setPrevious(add);
-            this.access.setNext(add);
-        }
 
-    }
 
     @Override
     public void printList() {

@@ -7,43 +7,59 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CircularListTest {
-    CircularList<Object> linkedList = new CircularList<>();
-    Node<Object> test1 = new Node<>("Prueba");
-    Node<Object> test2 = new Node<>("Prueba2");
-    Node<Object> test3 = new Node<>("Prueba3");
-    Node<Object> test4 = new Node<>(2);
+    CircularList<Object> circularList = new CircularList<>();
+
     @Test
-    public void testAdd() throws EmptyList, InvalidIndex {
-        linkedList.addFirst(test1.getValue());
-        linkedList.addLast(test2.getValue());
-        linkedList.addFirst(test3.getValue());
-        linkedList.addLast(test4.getValue());
-        int tamano = linkedList.size();
-        Object value1 = linkedList.get(0);
-        assertEquals(4, tamano);
-        assertEquals(value1, test3.getValue());
+    public void testAddFirst() throws InvalidIndex, EmptyList {
+        assertThrows(EmptyList.class, ()->{circularList.get(3);});
+        circularList.addFirst("Nodo1");
+        circularList.addFirst("Nodo2");
+        assertEquals("Nodo2", circularList.get(1));
+        assertEquals(2, circularList.size());
+        assertThrows(InvalidIndex.class, ()->{circularList.get(3);});
     }
+
     @Test
-    public void testRemoveValue() throws EmptyList {
-        linkedList.addFirst(test1.getValue());
-        linkedList.addLast(test2.getValue());
-        linkedList.addFirst(test3.getValue());
-        linkedList.addLast(test4.getValue());
-        int tamano = linkedList.size();
-        linkedList.removeValue(test2.getValue());
-        int tamano_final = linkedList.size();
-        assertNotEquals(tamano, tamano_final);
+    public void testAddLasrt() throws InvalidIndex, EmptyList {
+        assertThrows(EmptyList.class, ()->{circularList.get(3);});
+        circularList.addLast("Nodo1");
+        circularList.addLast("Nodo2");
+        assertEquals("Nodo1", circularList.get(1));
+        assertEquals(2, circularList.size());
+        assertThrows(InvalidIndex.class, ()->{circularList.get(3);});
     }
+
     @Test
-    public void testRemovePosition() throws EmptyList, InvalidIndex {
-        linkedList.addFirst(test1.getValue());
-        linkedList.addLast(test2.getValue());
-        linkedList.addFirst(test3.getValue());
-        linkedList.addLast(test4.getValue());
-        int tamano = linkedList.size();
-        linkedList.removePosition(0);
-        int tamano_final = linkedList.size();
-        assertNotEquals(tamano, tamano_final);
+    public void testContains() {
+        circularList.addFirst("Nodo1");
+        circularList.addFirst("Nodo2");
+        circularList.addLast("Nodo3");
+        circularList.addLast("Nodo4");
+        assertTrue(circularList.contains("Nodo3"));
+        assertFalse(circularList.contains("X"));
+    }
+
+    @Test
+    public void testRemovePos() throws EmptyList, InvalidIndex {
+        assertThrows(EmptyList.class, ()->{circularList.removePosition(1);});
+        circularList.addFirst("Nodo1");
+        circularList.addFirst("Nodo2");
+        circularList.addFirst("Nodo3");
+        circularList.addFirst("Nodo4");
+        circularList.removePosition(2);
+        assertFalse(circularList.contains("Nodo3"));
+        assertThrows(InvalidIndex.class, ()->{circularList.removePosition(777);});
+    }
+
+    @Test
+    public void testRemoveValue() throws EmptyList{
+        assertThrows(EmptyList.class, ()->{circularList.removeValue("X");});
+        circularList.addFirst("Nodo1");
+        circularList.addFirst("Nodo2");
+        circularList.addFirst("Nodo3");
+        circularList.addFirst("Nodo4");
+        circularList.removeValue("Nodo2");
+        assertFalse(circularList.contains("Nodo2"));
     }
 
 }

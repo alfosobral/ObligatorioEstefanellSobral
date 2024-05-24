@@ -39,4 +39,9 @@ class QueueTest {
         assertEquals(4,size);
         assertFalse(queue.contains(test1.getValue()));
     }
+
+    @Test
+    public void testExceptions() throws EmptyQueue {
+        assertThrows(EmptyQueue.class, ()-> {queue.dequeue();});
+    }
 }

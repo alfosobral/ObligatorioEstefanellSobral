@@ -31,4 +31,19 @@ class BinaryTreeTest {
         assertNotEquals("Prueba2", tree.getMin());
     }
 
+    @Test
+    public void testExceptions() throws EmptyTree, InvalidKey {
+        assertThrows(EmptyTree.class, ()->{tree.getMin();});
+        assertThrows(EmptyTree.class, ()->{tree.delete(4);});
+        tree.add(10, "prueba1");
+        tree.add(15, "prueba2");
+        tree.add(45, "prueba3");
+        tree.add(0, "prueba4");
+        Node<Integer, Object> nodo = new Node<>(10, "pepe");
+        assertThrows(InvalidKey.class, ()->{tree.add(10, "prueba5");});
+        assertThrows(InvalidKey.class, ()->{tree.addNode(nodo);});
+        assertThrows(InvalidKey.class, ()->{tree.delete(-4);});
+
+    }
+
 }

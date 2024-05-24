@@ -47,4 +47,13 @@ class DoubleLinkedTest {
         assertNotEquals(tamano, tamano_final);
     }
 
+    @Test
+    public void testExceptions() throws EmptyList, InvalidIndex {
+        assertThrows(EmptyList.class, ()->{linkedList.get(4);});
+        linkedList.addFirst("Hola");
+        assertThrows(InvalidIndex.class, ()->{linkedList.get(4);});
+        linkedList.removeValue("Hola");
+        assertThrows(EmptyList.class, ()->{linkedList.removeValue(1);});
+    }
+
 }

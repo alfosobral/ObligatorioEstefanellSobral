@@ -22,7 +22,7 @@ class StackTest {
     }
 
     @Test
-    public void testPop() throws EmptyStack{
+    public void testPop() throws EmptyStack {
         stack.push(test1.getValue());
         stack.push(test2.getValue());
         stack.push(test3.getValue());
@@ -33,11 +33,13 @@ class StackTest {
         size = stack.size();
         assertEquals(3, size);
         stack.makeEmpty();
-        assertThrows(EmptyStack.class, ()->{stack.pop();});
+        assertThrows(EmptyStack.class, () -> {
+            stack.pop();
+        });
     }
 
     @Test
-    public void testPeek() throws EmptyStack{
+    public void testPeek() throws EmptyStack {
         stack.push(test1.getValue());
         stack.push(test2.getValue());
         stack.push(test3.getValue());
@@ -48,11 +50,13 @@ class StackTest {
         Object peek = stack.peek().getValue();
         assertEquals(peek, test3.getValue());
         stack.makeEmpty();
-        assertThrows(EmptyStack.class, ()->{stack.peek();});
+        assertThrows(EmptyStack.class, () -> {
+            stack.peek();
+        });
     }
 
     @Test
-    public void testMakeEmpty() throws EmptyStack{
+    public void testMakeEmpty() throws EmptyStack {
         stack.push(test1.getValue());
         stack.push(test2.getValue());
         stack.push(test3.getValue());
@@ -65,11 +69,18 @@ class StackTest {
     }
 
     @Test
-    public void testContains() throws EmptyStack{
+    public void testContains() throws EmptyStack {
         stack.push(test1.getValue());
         stack.push(test2.getValue());
         stack.push(test3.getValue());
         stack.push(test4.getValue());
         assertTrue(stack.contains(test3.getValue()));
+    }
+
+    @Test
+    public void testExceptions() throws EmptyStack {
+        stack.makeEmpty();
+        assertThrows(EmptyStack.class, ()->{stack.pop();});
+        assertThrows(EmptyStack.class, ()->{stack.peek();});
     }
 }

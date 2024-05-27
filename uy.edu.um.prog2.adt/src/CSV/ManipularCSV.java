@@ -1,3 +1,5 @@
+package CSV;
+
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +14,7 @@ public class ManipularCSV {
             reader = new BufferedReader(new FileReader(fileName));
             while ((line = reader.readLine()) != null){
             parts = line.split(",");
-            //printLine();
+            printLine();
             System.out.println();
             }
             reader.close();

@@ -1,4 +1,7 @@
+import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -7,7 +10,7 @@ public class Main {
             System.out.println(".");
             Thread.sleep(1000);
         }
-
+        LinkedList<String> listaPaises;
         Scanner input = new Scanner(System.in);
         System.out.println("Bienvenido al consultor de rankings de Spotify!");
         System.out.println("A continuacion se listan las opciones para realizar consultas:");
@@ -24,14 +27,24 @@ public class Main {
             int opcion = (int)(input.nextInt());
             switch (opcion) {
                 case 1:
+                    boolean opcion1 = true;
+                    while (opcion1) {}
                     break;
                 case 2:
+                    boolean opcion2 = true;
+                    while (opcion2) {}
                     break;
                 case 3:
+                    boolean opcion3 = true;
+                    while (opcion3) {}
                     break;
                 case 4:
+                    boolean opcion4 = true;
+                    while (opcion4) {}
                     break;
                 case 5:
+                    boolean opcion5 = true;
+                    while (opcion5) {}
                     break;
                 case 6:
                     programaFuncionando = false;

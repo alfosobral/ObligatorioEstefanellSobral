@@ -2,13 +2,20 @@ package CSV;
 
 import CSV.Exceptions.InvalidCountry;
 
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
 
-public class Metodos implements MisMetodos{
-    @Override
-    public void opcion1(String pais, Date dia) throws InvalidCountry {
 
-    }
+public class Metodos implements MisMetodos{
+    public String[] auxList;
+    public String[] top10;
+    ManipularCSV file = new ManipularCSV();
+
+
 
     @Override
     public void opcion2(Date dia) {

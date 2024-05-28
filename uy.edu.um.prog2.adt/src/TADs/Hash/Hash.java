@@ -4,7 +4,7 @@ import TADs.Hash.Exceptions.InvalidHashKey;
 
 import java.util.Arrays;
 
-public class Hash<T, K> implements MyHash<K, T>{
+public class Hash<K, T> implements MyHash<K, T>{
     private Node<K, T>[] array;
     private Integer size, counter;
 

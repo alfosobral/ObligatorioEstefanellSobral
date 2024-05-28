@@ -1,3 +1,5 @@
+import CSV.ManipularCSV;
+
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -6,11 +8,13 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         boolean programaFuncionando = true;
-        for (int i = 0; i < 3; i++) {
-            System.out.println(".");
-            Thread.sleep(1000);
-        }
-        LinkedList<String> listaPaises;
+        System.out.println("Cargando base de datos.");
+//        for (int i = 0; i < 3; i++) {
+//            System.out.println(".");
+//            Thread.sleep(1000);
+//        }
+        ManipularCSV mcvs = new ManipularCSV();
+        mcvs.readFile("C:\\Users\\Alfonso\\OneDrive\\Escritorio\\universal_top_spotify_songs.csv");
         Scanner input = new Scanner(System.in);
         System.out.println("Bienvenido al consultor de rankings de Spotify!");
         System.out.println("A continuacion se listan las opciones para realizar consultas:");

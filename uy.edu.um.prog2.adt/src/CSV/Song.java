@@ -6,14 +6,16 @@ import java.util.LinkedList;
 
 public class Song {
     private String spotify_id;
+    private String fecha;
     private String name;
     private String artists;
     private int daily_rank;
     private String country;
-    private Long tempo;
+    private int tempo;
 
-    public Song(String spotify_id, String name, String artists, int daily_rank, String country, Long tempo) {
+    public Song(String spotify_id, String fecha, String  name, String artists, int daily_rank, String country, int tempo) {
         this.spotify_id = spotify_id;
+        this.fecha = fecha;
         this.name = name;
         this.artists = artists;
         this.daily_rank = daily_rank;
@@ -41,7 +43,7 @@ public class Song {
         return country;
     }
 
-    public Long getTempo() {
+    public int getTempo() {
         return tempo;
     }
 }

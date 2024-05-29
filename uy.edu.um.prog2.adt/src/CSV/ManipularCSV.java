@@ -1,22 +1,28 @@
 package CSV;
 
 import CSV.Exceptions.InvalidCountry;
+<<<<<<< HEAD
 import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.Hash.Hash;
 import TADs.LinkedList.CircularList;
 import TADs.LinkedList.Exceptions.EmptyList;
 import TADs.LinkedList.Exceptions.InvalidIndex;
 import TADs.LinkedList.LinkedList;
+=======
+>>>>>>> 83dc2f4ce9d4d127c07b8175f06ca61139c6a99e
 import TADs.Tree.BinaryTree;
 
 import javax.management.MBeanNotificationInfo;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.security.spec.RSAOtherPrimeInfo;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ManipularCSV {
+<<<<<<< HEAD
     private BufferedReader reader;
     private String texto;
     private String cancion;
@@ -75,27 +81,37 @@ public class ManipularCSV {
         for(int i = 0; i < 10; i++) {
             Song s = top50.get(i);
             System.out.println(s.getDaily_rank() + " - " + s.getName() + ", " + s.getArtists());
+=======
+    private List<String> lines = new ArrayList<>();
+
+    public void readFile(String fileName){
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                lines.add(line);
+            }
+        }catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+>>>>>>> 83dc2f4ce9d4d127c07b8175f06ca61139c6a99e
         }
     }
+    public List<String> getLines(){
+        return lines;
+    }
 
-//    public List<String[]> pais(List<String[]>list, int max){
-//        String[] pais;
-//        for (int i = 0; i<max; i++){
-//            List =
-//        }
-//    }
-//
-//    public void Lista_Fechas(){
-//        String fecha1;
-//        String fecha2;
-//        for()
-//    }
-
-
+<<<<<<< HEAD
 //    public void printLine(){
 //        for (int i=0; i<cancion.length;i++){
 //            System.out.println(cancion[i] + "  |  ");
 //        }
 //    }
+=======
+    public void printLine(){
+        for (int i=0; i<lines.size();i++){
+            System.out.println(lines.get(i) + "  |  ");
+            System.out.println();
+        }
+    }
+>>>>>>> 83dc2f4ce9d4d127c07b8175f06ca61139c6a99e
 
 }

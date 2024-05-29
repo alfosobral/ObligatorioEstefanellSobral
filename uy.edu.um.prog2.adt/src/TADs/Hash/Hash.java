@@ -141,7 +141,7 @@ public class Hash<K, T> implements MyHash<K, T>{
         Node<K,T>[] thisArray = this.array;
         Node<K,T>[] cloneHash = new Node[newSize];
         this.setArray(cloneHash);
-        this.setSize(newSize);
+        this.size = newSize;
         for (int j = 0; j<thisArray.length; j++){
             if (thisArray[j] != null) {
                 int index = this.hashFunction(thisArray[j].getKey());

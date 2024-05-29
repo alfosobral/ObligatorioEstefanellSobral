@@ -166,5 +166,17 @@ public class LinkedList<T> implements MyList<T> {
             throw new EmptyList();
         }
     }
+
+    public void makeEmpty() throws EmptyList, InvalidIndex {
+        if (this.first != null) {
+            Node<T> temp = this.first;
+            while (temp.getNext() != null) {
+                Node<T> aux = temp.getNext();
+                temp.setNext(null);
+                temp = aux;
+            }
+            temp = null;
+        }
+    }
 }
 

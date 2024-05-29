@@ -1,4 +1,9 @@
+import CSV.Exceptions.InvalidCountry;
 import CSV.ManipularCSV;
+import TADs.Hash.Exceptions.InvalidHashKey;
+import TADs.Hash.Hash;
+import TADs.LinkedList.Exceptions.EmptyList;
+import TADs.LinkedList.Exceptions.InvalidIndex;
 
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -6,9 +11,9 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, EmptyList, InvalidIndex, InvalidCountry, InvalidHashKey {
         boolean programaFuncionando = true;
-        System.out.println("Cargando base de datos.");
+        System.out.println("Cargando base de datos");
 //        for (int i = 0; i < 3; i++) {
 //            System.out.println(".");
 //            Thread.sleep(1000);
@@ -32,7 +37,27 @@ public class Main {
             switch (opcion) {
                 case 1:
                     boolean opcion1 = true;
-                    while (opcion1) {}
+                    while (opcion1) {
+                        boolean paisValido = false;
+                        String pais = null;
+                        String fecha = null;
+                        while (!paisValido) {
+                            System.out.println();
+                            System.out.println("Ingrese un pais a continuacion: ");
+                            pais = input.next();
+                            //if (hashPaises.contains(pais))
+                            paisValido = true;
+                        }
+                        boolean fechaValida = false;
+                        while (!fechaValida) {
+                            System.out.println();
+                            System.out.println("Ingrese una fecha a continuacion (DD/MM/YYYY): ");
+                            fecha = input.next();
+                            //if (fecha valida)
+                            fechaValida= true;
+                        }
+                        mcvs.opcion1(pais, fecha);
+                        }
                     break;
                 case 2:
                     boolean opcion2 = true;

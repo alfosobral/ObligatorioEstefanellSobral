@@ -1,8 +1,11 @@
 package CSV;
 
 import CSV.Exceptions.InvalidCountry;
+import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.Hash.Hash;
 import TADs.LinkedList.CircularList;
+import TADs.LinkedList.Exceptions.EmptyList;
+import TADs.LinkedList.Exceptions.InvalidIndex;
 import TADs.LinkedList.LinkedList;
 import TADs.Tree.BinaryTree;
 
@@ -15,48 +18,64 @@ import java.util.List;
 
 public class ManipularCSV {
     private BufferedReader reader;
-    private String line;
-    private String parts[];
+    private String texto;
+    private String cancion;
     public String auxList[];
-    public String atributes[];
-    private Hash<String, Song> hashMetodo1 = new Hash<>(5);
+    public String[] atributes;
+    private Hash<String, LinkedList<Song>> hashMetodo1 = new Hash<>(5);
     public BufferedReader getReader() {
         return reader;
     }
 
     public void readFile(String fileName){
         try {
-            String paisActual = null;
-            String fecha = null;
+            String keyActual = "****";
+            String paisActual = "GLB";
+            String fechaActual = "13/5/2024";
+            int counter = 0;
             reader = new BufferedReader(new FileReader(fileName));
-            while ((line = reader.readLine()) != null){
-            parts = line.split(" ; ");
-            atributes = parts[0].split(",");
-            if (atributes[6] == null) {
-                atributes[6] = "Global";
-            }
-            Song s = new Song(atributes[0], atributes[5], atributes[1], atributes[2], 0, atributes[6], 0);
-            hashMetodo1.add(atributes[0], s);
-//            printLine();
-//            System.out.println();
+            while ((cancion = reader.readLine()) != null){
+                cancion = cancion.replaceAll("\"", "");
+                atributes = cancion.split(";");
+                if (counter > 1 && atributes.length > 2) {
+                    if (atributes[6].isEmpty()) {
+                        atributes[6] = paisActual;
+                    }
+                    if (atributes[7].isEmpty()) {
+                        atributes[7] = fechaActual;
+                    }
+                    String key = atributes[6] + atributes[7];
+                    Song s = new Song(atributes[0], atributes[7], atributes[1], atributes[2], atributes[3], atributes[6], atributes[23]);
+                    if (key.equals(keyActual)) {
+                        this.hashMetodo1.serch(key).addLast(s);
+                    } else {
+                        this.createNewList(key);
+                        this.hashMetodo1.serch(key).addLast(s);
+                        keyActual = key;
+                    }
+
+                }
+                counter++;
             }
             reader.close();
-            line = null;
-            parts = null;
+            texto = null;
+            cancion = null;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
     }
-    public void opcion1(String pais, String dia) throws InvalidCountry {
-        for (String part : parts) {
-            for (int j = 0; j < 24; j++) {
-                auxList[j] = Arrays.toString(part.split(";"));
-            }
-            while (auxList[8].equals(dia)) {
-                System.out.println(part);
-            }
-        }
 
+    public void createNewList(String key) {
+        LinkedList<Song> top = new LinkedList<>();
+        hashMetodo1.add(key, top);
+    }
+    public void opcion1(String pais, String dia) throws InvalidCountry, InvalidHashKey, EmptyList, InvalidIndex {
+        String key = pais + dia;
+        LinkedList<Song> top50 = hashMetodo1.serch(key);
+        for(int i = 0; i < 10; i++) {
+            Song s = top50.get(i);
+            System.out.println(s.getDaily_rank() + " - " + s.getName() + ", " + s.getArtists());
+        }
     }
 
 //    public List<String[]> pais(List<String[]>list, int max){
@@ -73,10 +92,10 @@ public class ManipularCSV {
 //    }
 
 
-    public void printLine(){
-        for (int i=0; i<parts.length;i++){
-            System.out.println(parts[i] + "  |  ");
-        }
-    }
+//    public void printLine(){
+//        for (int i=0; i<cancion.length;i++){
+//            System.out.println(cancion[i] + "  |  ");
+//        }
+//    }
 
 }

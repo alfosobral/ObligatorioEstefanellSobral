@@ -9,11 +9,11 @@ public class Song {
     private String fecha;
     private String name;
     private String artists;
-    private int daily_rank;
+    private String daily_rank;
     private String country;
-    private int tempo;
+    private String tempo;
 
-    public Song(String spotify_id, String fecha, String  name, String artists, int daily_rank, String country, int tempo) {
+    public Song(String spotify_id, String fecha, String  name, String artists, String daily_rank, String country, String tempo) {
         this.spotify_id = spotify_id;
         this.fecha = fecha;
         this.name = name;
@@ -35,7 +35,7 @@ public class Song {
         return artists;
     }
 
-    public int getDaily_rank() {
+    public String getDaily_rank() {
         return daily_rank;
     }
 
@@ -43,7 +43,9 @@ public class Song {
         return country;
     }
 
-    public int getTempo() {
+    public String getTempo() {
         return tempo;
     }
+
+    public String getFecha() { return fecha; }
 }

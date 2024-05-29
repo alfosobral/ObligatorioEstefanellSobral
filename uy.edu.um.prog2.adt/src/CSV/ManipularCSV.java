@@ -9,6 +9,8 @@ import TADs.LinkedList.LinkedList;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ManipularCSV {
     private BufferedReader reader;
@@ -16,7 +18,9 @@ public class ManipularCSV {
     private String cancion;
     public String auxList[];
     public String[] atributes;
-    private Hash<String, LinkedList<Song>> hashMetodo1 = new Hash<>(5);
+    private Hash<String, LinkedList<Song>> hashCanciones = new Hash<>(5);
+    private LinkedList<String> paises = new LinkedList<>();
+    private LinkedList<Song> cancionesDistintas = new LinkedList<>();
     public BufferedReader getReader() {
         return reader;
     }
@@ -38,13 +42,17 @@ public class ManipularCSV {
                     if (atributes[7].isEmpty()) {
                         atributes[7] = fechaActual;
                     }
+                    if (!paises.contains(atributes[6])) {
+                        paises.addLast(atributes[6]);
+                    }
                     String key = atributes[6] + atributes[7];
                     Song s = new Song(atributes[0], atributes[7], atributes[1], atributes[2], atributes[3], atributes[6], atributes[23]);
+
                     if (key.equals(keyActual)) {
-                        this.hashMetodo1.serch(key).addLast(s);
+                        this.hashCanciones.serch(key).addLast(s);
                     } else {
                         this.createNewList(key);
-                        this.hashMetodo1.serch(key).addLast(s);
+                        this.hashCanciones.serch(key).addLast(s);
                         keyActual = key;
                     }
 
@@ -61,14 +69,65 @@ public class ManipularCSV {
 
     public void createNewList(String key) {
         LinkedList<Song> top = new LinkedList<>();
-        hashMetodo1.add(key, top);
+        hashCanciones.add(key, top);
     }
     public void opcion1(String pais, String dia) throws InvalidCountry, InvalidHashKey, EmptyList, InvalidIndex {
         String key = pais + dia;
-        LinkedList<Song> top50 = hashMetodo1.serch(key);
+        LinkedList<Song> top50 = hashCanciones.serch(key);
         for(int i = 0; i < 10; i++) {
             Song s = top50.get(i);
             System.out.println(s.getDaily_rank() + " - " + s.getName() + ", " + s.getArtists());
+        }
+
+    }
+
+    public void opcion2(String dia) throws EmptyList, InvalidIndex, InvalidHashKey {
+        String key = "GLB" + dia;
+        LinkedList<Song> top5Songs = new LinkedList<>();
+        LinkedList<String> top5id = new LinkedList<>();
+        int[] top5counter = new int[5];
+        Arrays.fill(top5counter, 0);
+        LinkedList<Song> listaGrande = new LinkedList<>();
+        LinkedList<Song> top50 = this.hashCanciones.serch(key);
+        for (int i = 0; i < 5; i++) {
+            Song s = top50.get(i);
+            top5Songs.addLast(s);
+            top5id.addLast(s.getSpotify_id());
+        }
+        for (int i = 0; i < this.paises.size(); i++) {
+            key = paises.get(i) + dia;
+            top50 = this.hashCanciones.serch(key);
+            listaGrande.mergeLists(top50);
+        }
+        for (int i = 0; i < listaGrande.size(); i++) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(1))) {
+                top5counter[0]++;
+            }
+        }
+        for (int i = 0; i < listaGrande.size(); i++) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(2))) {
+                top5counter[1]++;
+            }
+        }
+        for (int i = 0; i < listaGrande.size(); i++) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(3))) {
+                top5counter[2]++;
+            }
+        }
+        for (int i = 0; i < listaGrande.size(); i++) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(4))) {
+                top5counter[3]++;
+            }
+        }
+        for (int i = 0; i < listaGrande.size(); i++) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(5))) {
+                top5counter[4]++;
+            }
+
+        }
+        for (int i = 0; i < 5; i++) {
+            Song s = top5Songs.get(i);
+            System.out.println((i+1) + s.getName() + ", " + s.getArtists() + " " + top5counter[i] + " reproducciones");
         }
 
     }

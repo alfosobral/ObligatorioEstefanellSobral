@@ -178,5 +178,13 @@ public class LinkedList<T> implements MyList<T> {
             temp = null;
         }
     }
+
+    public void mergeLists(LinkedList<T> add) throws EmptyList, InvalidIndex {
+        if (add.size() != 0) {
+            for(int i = 0; i < add.size(); i++) {
+                this.addLast(add.get(i));
+            }
+        }
+    }
 }
 

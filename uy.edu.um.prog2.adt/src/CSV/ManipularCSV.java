@@ -1,6 +1,7 @@
 package CSV;
 
 import CSV.Exceptions.InvalidCountry;
+import TADs.Hash.Hash;
 import TADs.Tree.BinaryTree;
 
 import javax.management.MBeanNotificationInfo;
@@ -10,6 +11,7 @@ import java.io.FileReader;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class ManipularCSV {
@@ -24,6 +26,9 @@ public class ManipularCSV {
         }catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
         }
+        System.out.println(lines.size());
+        lines.getFirst().replaceAll("^\"|\"$", "");
+
     }
     public List<String> getLines(){
         return lines;

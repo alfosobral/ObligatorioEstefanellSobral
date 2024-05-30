@@ -1,5 +1,7 @@
 package TADs.Hash;
 
+import java.util.Objects;
+
 public class Node<K, T> {
     private T value;
     private K key;
@@ -16,8 +18,16 @@ public class Node<K, T> {
         return key;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Node<?, ?> node)) return false;
+        return Objects.equals(key, node.key);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(key);
+    }
 }
 

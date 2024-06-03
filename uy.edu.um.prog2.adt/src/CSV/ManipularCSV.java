@@ -16,9 +16,9 @@ public class ManipularCSV {
     private BufferedReader reader;
     private String texto;
     private String cancion;
-    public String auxList[];
     public String[] atributes;
-    private Hash<String, LinkedList<Song>> hashCanciones = new Hash<>(5);
+    private Hash<String, Song> hashCanciones = new Hash<>(5);
+    private Hash<String, LinkedList<String>> tablaExcel = new Hash<>(5);
     private LinkedList<String> paises = new LinkedList<>();
     private LinkedList<Song> cancionesDistintas = new LinkedList<>();
     public BufferedReader getReader() {
@@ -59,6 +59,7 @@ public class ManipularCSV {
                 }
                 counter++;
             }
+            System.out.println(hashCanciones.getCounter());
             reader.close();
             texto = null;
             cancion = null;
@@ -100,34 +101,34 @@ public class ManipularCSV {
             listaGrande.mergeLists(top50);
         }
         for (int i = 0; i < listaGrande.size(); i++) {
-            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(1))) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(0))) {
                 top5counter[0]++;
             }
         }
         for (int i = 0; i < listaGrande.size(); i++) {
-            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(2))) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(1))) {
                 top5counter[1]++;
             }
         }
         for (int i = 0; i < listaGrande.size(); i++) {
-            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(3))) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(2))) {
                 top5counter[2]++;
             }
         }
         for (int i = 0; i < listaGrande.size(); i++) {
-            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(4))) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(3))) {
                 top5counter[3]++;
             }
         }
         for (int i = 0; i < listaGrande.size(); i++) {
-            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(5))) {
+            if (listaGrande.get(i).getSpotify_id().equals(top5id.get(4))) {
                 top5counter[4]++;
             }
 
         }
         for (int i = 0; i < 5; i++) {
             Song s = top5Songs.get(i);
-            System.out.println((i+1) + s.getName() + ", " + s.getArtists() + " " + top5counter[i] + " reproducciones");
+            System.out.println((i+1) + " - " + s.getName() + ", " + s.getArtists() + " " + "[aparecio en " + top5counter[i] + " top 50]");
         }
 
     }

@@ -38,7 +38,7 @@ public class Hash<K, T> implements MyHash<K, T>{
         for (int i = 0; i < keyToStr.length(); i++){
             index += keyToStr.charAt(i);
         }
-        index = index%size;
+        index = index % size;
         return index;
     }
 
@@ -46,12 +46,14 @@ public class Hash<K, T> implements MyHash<K, T>{
     public void add(K key, T value) {
         Node<K, T> add = new Node<>(key, value);
         if (this.checkCapacity()) {
-            this.reSize();
+            //this.reSize();
+            this.reHash();
         }
+        key = (K) key.toString().trim();
         int index = this.hashFunction(key);
         if (this.array[index] != null) {
             do {
-                index = (index+1)%size;
+                index = (index+1) % size;
             }
             while (this.array[index] != null);
         }
@@ -88,24 +90,40 @@ public class Hash<K, T> implements MyHash<K, T>{
             this.reOrganize(this.size);
         }
     }
-
+//    public T serch(K key) throws InvalidHashKey {
+//        T value;
+//        int index = this.hashFunction(key);
+//        int oIndex = index;
+//        if (array[index] != null) {
+//            while (!array[index].getKey().equals(key)) {
+//                index = (index + 1) % size;
+//                if (index == oIndex) {
+//                    throw new InvalidHashKey();
+//                }
+//            }
+//        } else {
+//            throw new InvalidHashKey();
+//        }
+//        value = this.array[index].getValue();
+//        return value;
+//    }
     @Override
-    public T serch(K key) throws InvalidHashKey {
-        T value;
-        int index = this.hashFunction(key);
+    public T search(K key) throws InvalidHashKey {
+        int index = hashFunction(key);
         int oIndex = index;
-        if (array[index] != null) {
-            while (!array[index].getKey().equals(key)) {
+        if (array[index] == null) {
+            throw new InvalidHashKey();
+        } else {
+            while (array[index] != null) {
+                if(array[index].getKey().equals(key)) {
+                    return array[index].getValue();
+                }
                 index = (index + 1) % size;
                 if (index == oIndex) {
-                    throw new InvalidHashKey();
+                    break;
                 }
             }
-        } else {
-            throw new InvalidHashKey();
-        }
-        value = this.array[index].getValue();
-        return value;
+        } throw new InvalidHashKey();
     }
 
     @Override
@@ -136,6 +154,32 @@ public class Hash<K, T> implements MyHash<K, T>{
         this.reOrganize(p);
     }
 
+    private int getNewSize(int n) {
+        n = (n % 2 == 0) ? n + 1 : n + 2;
+        while (!isPrime(n)) {
+            n += 2;
+        }
+        return n;
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        if (num <= 3) {
+            return true;
+        }
+        if (num % 2 == 0 || num % 3 == 0) {
+            return false;
+        }
+        for (int i = 5; i * i <= num; i += 6) {
+            if (num % i == 0 || num % (i + 2) == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void reOrganize(int newSize){
         Node<K,T>[] thisArray = this.array;
@@ -160,7 +204,7 @@ public class Hash<K, T> implements MyHash<K, T>{
     public void printHash() {
         for (int i = 0; i < size; i++){
             if (array[i] != null) {
-                System.out.println((String) array[i].getValue() + " " +array[i].getKey());
+                System.out.println(i + " - " + (String) array[i].getValue() + " " +array[i].getKey());
             } else {
                 System.out.println("-");
             }
@@ -180,6 +224,28 @@ public class Hash<K, T> implements MyHash<K, T>{
             }
         }
         return false;
+    }
+
+    public void reHash() {
+        int newSize = getNewSize(size*2);
+        Node<K,T>[] newArray = new Node[newSize];
+        for (int i = 0; i < size; i++) {
+            if (array[i] != null) {
+                K key = array[i].getKey();
+                T value = array[i].getValue();
+                int newIndex = hashFunction(key) % newSize;
+                if (newArray[newIndex] == null) {
+                    newArray[newIndex] = new Node<>(key, value);
+                } else {
+                    do {
+                        newIndex = (newIndex + 1) % newSize;
+                    } while (newArray[newIndex] == null);
+                    newArray[newIndex] = new Node<>(key, value);
+                }
+            }
+        }
+        this.array = newArray;
+        this.size = newSize;
     }
 
 

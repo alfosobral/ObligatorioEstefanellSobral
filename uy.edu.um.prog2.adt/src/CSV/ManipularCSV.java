@@ -52,10 +52,10 @@ public class ManipularCSV {
                     String key = atributes[6] + atributes[7];
 
                     if (key.equals(keyActual)) {
-                        this.tablaExcel.serch(key).addLast(atributes[0]);
+                        this.tablaExcel.search(key).addLast(atributes[0]);
                     } else {
                         this.createNewList(key);
-                        this.tablaExcel.serch(key).addLast(atributes[0]);
+                        this.tablaExcel.search(key).addLast(atributes[0]);
                         keyActual = key;
                     }
 
@@ -78,9 +78,9 @@ public class ManipularCSV {
 
     public void opcion1(String pais, String dia) throws InvalidHashKey, EmptyList, InvalidIndex {
         String key = pais + dia;
-        LinkedList<String> top50 = this.tablaExcel.serch(key);
+        LinkedList<String> top50 = this.tablaExcel.search(key);
         for (int i = 0; i < 10; i++) {
-            Song s = this.hashCanciones.serch(top50.get(i));
+            Song s = this.hashCanciones.search(top50.get(i));
             System.out.println((i + 1) + " - " + s.getName() + ", " + s.getArtists());
         }
 

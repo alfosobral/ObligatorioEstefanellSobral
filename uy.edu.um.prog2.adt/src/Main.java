@@ -20,6 +20,7 @@ public class Main {
 //        }
         ManipularCSV mcvs = new ManipularCSV();
         mcvs.readFile("C:\\Users\\Alfonso\\OneDrive\\Escritorio\\universal_top_spotify_songs.csv");
+        //"C:\\Users\\Alfonso\\OneDrive\\Escritorio\\universal_top_spotify_songs.csv"
         Scanner input = new Scanner(System.in);
         System.out.println("Bienvenido al consultor de rankings de Spotify!");
         System.out.println("A continuacion se listan las opciones para realizar consultas:");

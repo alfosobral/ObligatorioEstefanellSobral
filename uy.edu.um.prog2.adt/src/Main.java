@@ -61,7 +61,18 @@ public class Main {
                     break;
                 case 2:
                     boolean opcion2 = true;
-                    while (opcion2) {}
+                    while (opcion2) {
+                        String fecha = null;
+                        boolean fechaValida = false;
+                        while (!fechaValida) {
+                            System.out.println();
+                            System.out.println("Ingrese una fecha a continuacion (DD/MM/YYYY): ");
+                            fecha = input.next();
+                            //if (fecha valida)
+                            fechaValida= true;
+                        }
+                        mcvs.opcion2(fecha);
+                    }
                     break;
                 case 3:
                     boolean opcion3 = true;

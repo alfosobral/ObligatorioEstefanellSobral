@@ -167,5 +167,20 @@ public class Hash<K, T> implements MyHash<K, T>{
         }
     }
 
+    public boolean contains(K key) {
+        int index = hashFunction(key);
+        int startIndex =index;
+        while (array[index] != null) {
+            if (array[index].getKey().equals(key)) {
+                return true;
+            }
+            index = (index + 1) % size;
+            if (index == startIndex) {
+                break;
+            }
+        }
+        return false;
+    }
+
 
 }

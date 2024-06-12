@@ -19,8 +19,9 @@ public class Main {
 //            Thread.sleep(1000);
 //        }
         ManipularCSV mcvs = new ManipularCSV();
-        mcvs.readFile("C:\\Users\\Alfonso\\OneDrive\\Escritorio\\universal_top_spotify_songs.csv");
+        mcvs.readFile("C:\\Users\\Usuario\\Desktop\\Exceel obligatorio chingado.csv");
         //"C:\\Users\\Alfonso\\OneDrive\\Escritorio\\universal_top_spotify_songs.csv"
+        //"C:\\Users\\Usuario\\Desktop\\Exceel obligatorio chingado.csv"
         Scanner input = new Scanner(System.in);
         System.out.println("Bienvenido al consultor de rankings de Spotify!");
         System.out.println("A continuacion se listan las opciones para realizar consultas:");

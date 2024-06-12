@@ -12,7 +12,6 @@ import java.io.FileReader;
 
 public class ManipularCSV {
     private BufferedReader reader;
-    private String texto;
     private String cancion;
     public String[] atributes;
     private Hash<String, Song> hashCanciones = new Hash<>(5);
@@ -30,8 +29,8 @@ public class ManipularCSV {
             reader = new BufferedReader(new FileReader(fileName));
             while ((cancion = reader.readLine()) != null){
                 cancion = cancion.replaceAll("\"", "");
-                atributes = cancion.split(";");
-                if (counter > 1 && atributes.length > 2) {
+                atributes = cancion.split(" , ");
+                if (counter > 0 && atributes.length > 2) {
                     if (atributes[6].isEmpty()) {
                         atributes[6] = paisActual;
                     }
@@ -64,8 +63,6 @@ public class ManipularCSV {
             }
             System.out.println(hashCanciones.getCounter());
             reader.close();
-            texto = null;
-            cancion = null;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }

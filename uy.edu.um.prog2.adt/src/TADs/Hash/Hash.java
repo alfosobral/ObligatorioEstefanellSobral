@@ -33,31 +33,27 @@ public class Hash<K, T> implements MyHash<K, T>{
 
     @Override
     public int hashFunction(K key) {
-        int index = 0;
         String keyToStr = key.toString();
-        for (int i = 0; i < keyToStr.length(); i++){
-            index += keyToStr.charAt(i);
+        int hash = 5381;
+        for (int i = 0; i < keyToStr.length(); i++) {
+            hash = (hash << 5) + hash + keyToStr.charAt(i);
         }
-        index = index % size;
-        return index;
+        return Math.abs(hash % size);
     }
 
     @Override
     public void add(K key, T value) {
         Node<K, T> add = new Node<>(key, value);
         if (this.checkCapacity()) {
-            //this.reSize();
-            this.reHash();
+            this.reSize();
+//            this.reHash();
         }
         key = (K) key.toString().trim();
         int index = this.hashFunction(key);
-        if (this.array[index] != null) {
-            do {
-                index = (index+1) % size;
-            }
-            while (this.array[index] != null);
+        while (this.array[index] != null) {
+            index = (index+1) % size;
         }
-        this.array[index] = add;
+        this.array[index] = new Node<>(key, value);
         this.counter++;
 
     }
@@ -65,74 +61,41 @@ public class Hash<K, T> implements MyHash<K, T>{
     @Override
     public void remove(K key) throws InvalidHashKey {
         int index = this.hashFunction(key);
-        int oIndex = index;
-        boolean keyFound = false;
-        if (this.array[index] != null && this.array[index].getKey().equals(key)) {
-            keyFound = true;
-        } else {
-            if (this.array[index]==null){
-                while (this.array[index]==null){
-                index = (index+1)%size;
-                }
-            }
-            do {
-                index = (index + 1) % size;
-            }
-            while (this.array[index] != null && !this.array[index].getKey().equals(key));
-            if (this.array[index] == null) {
+        int startIndex = index;
+        while (this.array[index] != null && !this.array[index].getKey().equals(key)) {
+            index = (index + 1) % size;
+            if (index == startIndex) {
                 throw new InvalidHashKey();
-            } else {
-                keyFound = true;
             }
         }
-        if (keyFound){
+        if (this.array[index] != null) {
             this.array[index] = null;
+            this.counter--;
             this.reOrganize(this.size);
+        } else {
+            throw new InvalidHashKey();
         }
     }
-//    public T serch(K key) throws InvalidHashKey {
-//        T value;
-//        int index = this.hashFunction(key);
-//        int oIndex = index;
-//        if (array[index] != null) {
-//            while (!array[index].getKey().equals(key)) {
-//                index = (index + 1) % size;
-//                if (index == oIndex) {
-//                    throw new InvalidHashKey();
-//                }
-//            }
-//        } else {
-//            throw new InvalidHashKey();
-//        }
-//        value = this.array[index].getValue();
-//        return value;
-//    }
+
     @Override
     public T search(K key) throws InvalidHashKey {
         int index = hashFunction(key);
-        int oIndex = index;
-        if (array[index] == null) {
-            throw new InvalidHashKey();
-        } else {
-            while (array[index] != null) {
-                if(array[index].getKey().equals(key)) {
-                    return array[index].getValue();
-                }
-                index = (index + 1) % size;
-                if (index == oIndex) {
-                    break;
-                }
+        int startIndex = index;
+        while (this.array[index] != null) {
+            if (this.array[index].getKey().equals(key)) {
+                return this.array[index].getValue();
             }
-        } throw new InvalidHashKey();
+            index = (index + 1) % size;
+            if (index == startIndex) {
+                break;
+            }
+        }
+        throw new InvalidHashKey();
     }
 
     @Override
     public boolean checkCapacity() {
-        boolean itsFull = false;
-        if (counter >= (int) (size*0.60)) {
-            itsFull = true;
-        }
-        return itsFull;
+        return counter >= (int) (size * 0.60);
     }
 
     @Override
@@ -163,39 +126,28 @@ public class Hash<K, T> implements MyHash<K, T>{
     }
 
     private boolean isPrime(int num) {
-        if (num <= 1) {
-            return false;
-        }
-        if (num <= 3) {
-            return true;
-        }
-        if (num % 2 == 0 || num % 3 == 0) {
-            return false;
-        }
+        if (num <= 1) return false;
+        if (num <= 3) return true;
+        if (num % 2 == 0 || num % 3 == 0) return false;
         for (int i = 5; i * i <= num; i += 6) {
-            if (num % i == 0 || num % (i + 2) == 0) {
-                return false;
-            }
+            if (num % i == 0 || num % (i + 2) == 0) return false;
         }
         return true;
     }
 
     @Override
-    public void reOrganize(int newSize){
-        Node<K,T>[] thisArray = this.array;
-        Node<K,T>[] cloneHash = new Node[newSize];
+    public void reOrganize(int newSize) {
+        Node<K, T>[] thisArray = this.array;
+        Node<K, T>[] cloneHash = new Node[newSize];
         this.setArray(cloneHash);
         this.size = newSize;
-        for (int j = 0; j<thisArray.length; j++){
-            if (thisArray[j] != null) {
-                int index = this.hashFunction(thisArray[j].getKey());
-                if (this.array[index] != null) {
-                    do {
-                        index = (index + 1) % size;
-                    }
-                    while (this.array[index] != null);
+        for (Node<K, T> node : thisArray) {
+            if (node != null) {
+                int index = this.hashFunction(node.getKey());
+                while (this.array[index] != null) {
+                    index = (index + 1) % size;
                 }
-                this.array[index] = thisArray[j];
+                this.array[index] = node;
             }
         }
     }
@@ -213,7 +165,7 @@ public class Hash<K, T> implements MyHash<K, T>{
 
     public boolean contains(K key) {
         int index = hashFunction(key);
-        int startIndex =index;
+        int startIndex = index;
         while (array[index] != null) {
             if (array[index].getKey().equals(key)) {
                 return true;
@@ -226,27 +178,21 @@ public class Hash<K, T> implements MyHash<K, T>{
         return false;
     }
 
-    public void reHash() {
-        int newSize = getNewSize(size*2);
-        Node<K,T>[] newArray = new Node[newSize];
-        for (int i = 0; i < size; i++) {
-            if (array[i] != null) {
-                K key = array[i].getKey();
-                T value = array[i].getValue();
-                int newIndex = hashFunction(key) % newSize;
-                if (newArray[newIndex] == null) {
-                    newArray[newIndex] = new Node<>(key, value);
-                } else {
-                    do {
-                        newIndex = (newIndex + 1) % newSize;
-                    } while (newArray[newIndex] == null);
-                    newArray[newIndex] = new Node<>(key, value);
-                }
-            }
-        }
-        this.array = newArray;
-        this.size = newSize;
-    }
+//    public void reHash() {
+//        int newSize = getNewSize(size * 2);
+//        Node<K, T>[] newArray = new Node[newSize];
+//        Arrays.fill(newArray, null);
+//        Node<K, T>[] oldArray = this.array;
+//        this.array = newArray;
+//        this.size = newSize;
+//        this.counter = 0;
+//
+//        for (Node<K, T> node : oldArray) {
+//            if (node != null) {
+//                this.add(node.getKey(), node.getValue());
+//            }
+//        }
+//    }
 
 
 }

@@ -21,6 +21,7 @@ public class Checker {
             "canada", "bielorrusia", "brasil", "bolivia", "bulgaria", "belgica", "australia", "austria", "argentina", "emiratos arabes"};
 
     public String checkCountry(String country) throws InvalidHashKey {
+
         country = country.toLowerCase();
         Hash<String, String> hashPaises = new Hash<>(5);
 
@@ -48,12 +49,38 @@ public class Checker {
     }
 
     public boolean checkDate(String date) {
+        if (date.length() == 10){
+            for (int i = 0; i < date.length(); i++) {
+                char ch = date.charAt(i);
+                switch (i){
+                    case 0,1,2,3,5,6,8,9:
+                        if (!Character.isDigit(ch)){
+                            System.out.println("Fecha inválida: " + date);
+                            return false;
+                        }
+                        break;
+                    case 4,7:
+                        if (ch != '-') {
+                            System.out.println("Fecha inválida: " + date);
+                            return false;
+                        }
+                        break;
+
+                }
+            }
+        }else {
+            System.out.println("Fecha inválida: " + date);
+            return false;
+        }
         Date dateD = convertStringToDate(date);
         if (dateD.after(convertStringToDate("2023-10-17")) && dateD.before(convertStringToDate("2024-05-14"))) {
             if(!dateD.equals(convertStringToDate("2024-04-24"))) {
                 return true;
             }
+            System.out.println("Fecha inválida: " + date);
             return false;
-        } return false;
+        }
+        System.out.println("Fecha inválida: " + date);
+        return false;
     }
 }

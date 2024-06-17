@@ -30,7 +30,8 @@ public class Metodos implements MisMetodos{
     
     public Metodos() {
         datos = new ManipularCSV();
-        datos.readFile("C:\\Users\\Alfonso\\OneDrive\\Escritorio\\Exceel obligatorio chingado.csv");
+        datos.readFile("C:\\Users\\Usuario\\Desktop\\Exceel obligatorio chingado.csv");
+        //"C:\\Users\\Alfonso\\OneDrive\\Escritorio\\Exceel obligatorio chingado.csv"
     }
 
     @Override

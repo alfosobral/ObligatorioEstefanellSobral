@@ -34,7 +34,7 @@ class HashTest {
     }
 
     @Test
-    public void testSearch() throws InvalidHashKey {
+    public void testSerch() throws InvalidHashKey {
         h.add("A", "Prueba1");
         h.add("B", "Prueba2");
         h.add("C", "Prueba3");
@@ -44,8 +44,6 @@ class HashTest {
         h.add("G", "Prueba7");
         h.add("H", "Prueba8");
         h.add("X", "Prueba9");
-        h.printHash();
-        System.out.println(h.hashFunction("C"));
         assertEquals("Prueba3", h.search("C"));
         assertEquals("Prueba9", h.search("X"));
         assertThrows(InvalidHashKey.class, ()->{h.remove("J");});

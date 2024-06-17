@@ -16,9 +16,9 @@ class BinaryTreeTest {
         tree.add(50,"Prueba");
         tree.add(25, "Prueba2");
         tree.add(75, "Prueba3");
-        assertEquals("Prueba", tree.serch(50));
-        assertEquals("Prueba2", tree.serch(25));
-        assertEquals("Prueba3",tree.serch(75));
+        assertEquals("Prueba", tree.search(50));
+        assertEquals("Prueba2", tree.search(25));
+        assertEquals("Prueba3",tree.search(75));
     }
     //searchNode funciona igual que el search
 

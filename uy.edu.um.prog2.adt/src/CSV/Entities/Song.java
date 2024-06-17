@@ -1,4 +1,4 @@
-package CSV;
+package CSV.Entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -8,14 +8,12 @@ public class Song {
     private String spotify_id;
     private String name;
     private String artists;
-    private String daily_rank;
-    private String tempo;
+    private Double tempo;
 
-    public Song(String spotify_id, String  name, String artists, String daily_rank,String tempo) {
+    public Song(String spotify_id, String  name, String artists, Double tempo) {
         this.spotify_id = spotify_id;
         this.name = name;
         this.artists = artists;
-        this.daily_rank = daily_rank;
         this.tempo = tempo;
     }
 
@@ -31,12 +29,7 @@ public class Song {
         return artists;
     }
 
-    public String getDaily_rank() {
-        return daily_rank;
-    }
-
-
-    public String getTempo() {
+    public Double getTempo() {
         return tempo;
     }
 

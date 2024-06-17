@@ -19,7 +19,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     }
 
     @Override
-    public T serch(K key) throws EmptyTree, InvalidKey {
+    public T search(K key) throws EmptyTree, InvalidKey {
         Node<K,T> res;
         if (this.root != null) {
             res = this.root.findNode(key);
@@ -30,7 +30,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     }
 
     @Override
-    public Node<K,T> serchNode(K key) throws EmptyTree, InvalidKey {
+    public Node<K,T> searchNode(K key) throws EmptyTree, InvalidKey {
         Node<K,T> res;
         if (this.root != null) {
             res = this.root.findNode(key);
@@ -73,7 +73,7 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
     @Override
     public void delete(K key) throws InvalidKey, EmptyTree, EmptyList, InvalidIndex {
         if (this.root != null) {
-            Node<K,T> del = this.serchNode(key);
+            Node<K,T> del = this.searchNode(key);
             Node<K,T> parent = this.root.findParent(key);
             if (parent.getLeftChild() == del) {
                 parent.setLeftChild(null);
@@ -183,6 +183,25 @@ public class BinaryTree<K,T> implements MyTree<K,T> {
             this.root.levelRouting(queue);
         } else {
             throw new EmptyTree();
+        }
+    }
+
+    public int size() {
+        return size(this.root);
+    }
+
+    private int size(Node<K, T> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.getLeftChild()) + size(node.getRightChild());
+    }
+
+    public boolean isEmpty() {
+        if (this.root != null) {
+            return false;
+        } else {
+            return true;
         }
     }
 

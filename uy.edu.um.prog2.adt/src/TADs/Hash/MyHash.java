@@ -9,7 +9,7 @@ public interface MyHash<K,T> {
 
     void remove(K key) throws InvalidHashKey;
 
-    T serch(K key) throws InvalidHashKey;
+    T search(K key) throws InvalidHashKey;
 
     boolean checkCapacity();
 

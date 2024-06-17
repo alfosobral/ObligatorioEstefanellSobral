@@ -12,6 +12,7 @@ class LinkedListTest {
     Node<Object> test2 = new Node<>("Prueba2");
     Node<Object> test3 = new Node<>("Prueba3");
     Node<Object> test4 = new Node<>(2);
+
     @Test
     public void testAdd() throws EmptyList, InvalidIndex {
         linkedList.addFirst(test1.getValue());
@@ -24,6 +25,7 @@ class LinkedListTest {
         assertEquals(value1, test3.getValue());
 
     }
+
     @Test
     public void testRemoveValue() throws EmptyList {
         linkedList.addFirst(test1.getValue());
@@ -50,11 +52,30 @@ class LinkedListTest {
 
     @Test
     public void testExceptions() throws EmptyList, InvalidIndex {
-        assertThrows(EmptyList.class, ()->{linkedList.get(4);});
+        assertThrows(EmptyList.class, () -> {
+            linkedList.get(4);
+        });
         linkedList.addFirst("Hola");
-        assertThrows(InvalidIndex.class, ()->{linkedList.get(4);});
+        assertThrows(InvalidIndex.class, () -> {
+            linkedList.get(4);
+        });
         linkedList.removeValue("Hola");
-        assertThrows(EmptyList.class, ()->{linkedList.removeValue(1);});
+        assertThrows(EmptyList.class, () -> {
+            linkedList.removeValue(1);
+        });
+    }
+
+    @Test
+    public void testAppend() throws EmptyList {
+        LinkedList<Object> lista2 = new LinkedList<>();
+        lista2.addLast("a");
+        lista2.addLast("b");
+        lista2.addLast("c");
+        linkedList.addLast("1");
+        linkedList.addLast("2");
+        linkedList.addLast("3");
+        linkedList.appendLists(lista2);
+        linkedList.printList();
     }
 }
 

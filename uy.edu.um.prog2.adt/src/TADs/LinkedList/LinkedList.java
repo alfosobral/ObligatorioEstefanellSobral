@@ -178,5 +178,35 @@ public class LinkedList<T> implements MyList<T> {
             temp = null;
         }
     }
+
+    public Node<T> getLast() {
+        return this.last;
+    }
+
+    public Node<T> getFirst() {
+        return this.first;
+    }
+
+    public boolean isEmpty() {
+        if (this.size() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void appendLists(LinkedList<T> listaAAgregar) {
+        if (listaAAgregar.first != null) {
+            appendListsRecursivo(listaAAgregar.first);
+        }
+    }
+
+    private void appendListsRecursivo(Node<T> nodo) {
+        if (nodo == null) {
+            return;
+        }
+        this.addLast(nodo.getValue());
+        appendListsRecursivo(nodo.getNext());
+    }
 }
 

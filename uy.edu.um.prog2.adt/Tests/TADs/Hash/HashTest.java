@@ -44,8 +44,8 @@ class HashTest {
         h.add("G", "Prueba7");
         h.add("H", "Prueba8");
         h.add("X", "Prueba9");
-        assertEquals("Prueba3", h.serch("C"));
-        assertEquals("Prueba9", h.serch("X"));
+        assertEquals("Prueba3", h.search("C"));
+        assertEquals("Prueba9", h.search("X"));
         assertThrows(InvalidHashKey.class, ()->{h.remove("J");});
     }
 

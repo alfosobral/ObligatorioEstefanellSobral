@@ -1,5 +1,7 @@
-package CSV;
+package CSV.Metodos;
 
+import CSV.Entities.ManipularCSV;
+import CSV.Entities.Song;
 import CSV.Exceptions.InvalidCountry;
 import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.Hash.Hash;
@@ -9,14 +11,11 @@ import TADs.LinkedList.LinkedList;
 import TADs.Tree.BinaryTree;
 import TADs.Tree.Exceptions.EmptyTree;
 import TADs.Tree.Exceptions.InvalidKey;
+import TADs.Tree.Node;
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,11 +35,13 @@ public class Metodos implements MisMetodos{
 
     @Override
     public void opcion1(String pais, String dia) throws InvalidCountry, InvalidHashKey, EmptyList, InvalidIndex {
+        System.out.println();
+        System.out.println("ESTE ES EL TOP 10");
         String key = pais + dia;
         LinkedList<String> idSongs = datos.getHashTablaRelaciones().search(key);
         for (int i = 0; i < 10; i++) {
             Song s = datos.getHashCanciones().search(idSongs.get(i));
-            System.out.println(s.getDaily_rank() + " - " + s.getName() + ", " + s.getArtists());
+            System.out.println((i + 1) + " - " + s.getName() + ", " + s.getArtists());
         }
     }
     @Override
@@ -72,6 +73,8 @@ public class Metodos implements MisMetodos{
                 top5Canciones.add(contadorCanciones.getArray()[i].getValue(), contadorCanciones.getArray()[i].getKey());
             }
         }
+        System.out.println();
+        System.out.println("ESTAS SON LAS 5 CANCIONES CON MAS APARICIONES EN TOPS 50:");
         for (int i = 0; i < 5; i++) {
             String songID = top5Canciones.getMax().getData();
             Song s = datos.getHashCanciones().search(songID);
@@ -137,6 +140,9 @@ public class Metodos implements MisMetodos{
                 top7Artistas.add(contadorArtistas.getArray()[i].getValue(), contadorArtistas.getArray()[i].getKey());
             }
         }
+
+        System.out.println();
+        System.out.println("ESTE ES EL TOP 7 ARTISTAS CON MAS REPRODUCCIONES:");
         for (int i = 0; i < 7; i++) {
             String artist = top7Artistas.getMax().getData();
             top7Artistas.delete(top7Artistas.getMax().getKey());

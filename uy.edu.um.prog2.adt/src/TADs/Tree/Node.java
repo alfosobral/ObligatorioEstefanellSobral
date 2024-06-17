@@ -73,7 +73,7 @@ public class Node<K,T> implements Comparable<K>{
             } else {
                 parent = this.leftChild.findFreeParent(key);
             }
-        } else if (this.compareTo(key) < 0) {
+        } else if (this.compareTo(key) <= 0) {
             if (this.rightChild == null) {
                 parent = this;
             } else {

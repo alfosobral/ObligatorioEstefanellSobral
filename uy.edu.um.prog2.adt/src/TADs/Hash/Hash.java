@@ -90,7 +90,7 @@ public class Hash<K, T> implements MyHash<K, T>{
     }
 
     @Override
-    public T serch(K key) throws InvalidHashKey {
+    public T search(K key) throws InvalidHashKey {
         T value;
         int index = this.hashFunction(key);
         int oIndex = index;
@@ -167,5 +167,22 @@ public class Hash<K, T> implements MyHash<K, T>{
         }
     }
 
+    public boolean contains(K key) {
+        int index = this.hashFunction(key);
+        int oIndex = index;
+        while (array[index] != null) {
+            if (array[index].getKey().equals(key)) {
+                return true;
+            }
+            index = (index + 1) % size;
+            if (index == oIndex) {
+                break;
+            }
+        }
+        return false;
+    }
 
+    public Node<K, T>[] getArray() {
+        return array;
+    }
 }

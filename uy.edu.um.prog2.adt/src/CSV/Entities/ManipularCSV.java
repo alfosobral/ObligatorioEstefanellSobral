@@ -1,20 +1,11 @@
-package CSV;
+package CSV.Entities;
 
-import CSV.Exceptions.InvalidCountry;
-import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.Hash.Hash;
-import TADs.LinkedList.CircularList;
-import TADs.LinkedList.Exceptions.EmptyList;
-import TADs.LinkedList.Exceptions.InvalidIndex;
 import TADs.LinkedList.LinkedList;
-import TADs.Tree.BinaryTree;
 
-import javax.management.MBeanNotificationInfo;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
-import java.util.List;
 
 public class ManipularCSV {
     private BufferedReader reader;
@@ -43,10 +34,10 @@ public class ManipularCSV {
                     if (atributos[7].isEmpty()) {
                         atributos[7] = fechaActual;
                     }
-                    int dailyRank = Integer.parseInt(atributos[3]);
+                    //int dailyRank = Integer.parseInt(atributos[3]);
                     Double tempo = Double.parseDouble(atributos[23]);
 
-                    Song s = new Song(atributos[0], atributos[1], atributos[2], dailyRank, tempo);
+                    Song s = new Song(atributos[0], atributos[1], atributos[2], tempo);
                     if (!hashCanciones.contains(atributos[0])) {
                         hashCanciones.add(atributos[0], s);
                     }
@@ -60,17 +51,17 @@ public class ManipularCSV {
                     }
                 } else if (atributos[0].equals("11IqNbLOD4s4nVYSuEttFR")) {
                     if (!hashCanciones.contains(atributos[0])) {
-                        int dailyRank = Integer.parseInt(atributos[4]);
+                        //int dailyRank = Integer.parseInt(atributos[4]);
                         double tempo = Double.parseDouble(atributos[24]);
-                        Song s = new Song(atributos[0], atributos[1], atributos[2], dailyRank, tempo);
+                        Song s = new Song(atributos[0], atributos[1], atributos[2], tempo);
                         hashCanciones.add(atributos[0], s);
                     }
                 } else if (atributos[0].equals("7hDoxkN20lLb06zifzYnD2")) {
                     atributos[1] = "Ishq - From ; Lost Found";
                     if (!hashCanciones.contains(atributos[0])) {
-                        int daily_rank = Integer.parseInt(atributos[3]);
+                        //int daily_rank = Integer.parseInt(atributos[3]);
                         double tempo = Double.parseDouble(atributos[23]);
-                        Song s = new Song(atributos[0], atributos[1], atributos[2], daily_rank, tempo);
+                        Song s = new Song(atributos[0], atributos[1], atributos[2], tempo);
                         hashCanciones.add(atributos[0], s);
                     }
                     String key = atributos[6] + atributos[7];

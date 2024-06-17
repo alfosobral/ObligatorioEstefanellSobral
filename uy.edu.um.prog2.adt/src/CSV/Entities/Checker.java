@@ -3,6 +3,10 @@ package CSV.Entities;
 import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.Hash.Hash;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Checker {
 
     private  String[] codPaises = {"GLB", "ZA", "VN", "VE", "UY", "US", "UA", "TW", "TR", "TH", "SV", "SK", "SG", "SE", "SA", "RO", "PY", "PT", "PL", "PK", "PH", "PE", "PA", "NZ", "NO",
@@ -30,5 +34,26 @@ public class Checker {
             return hashPaises.search(country);
         }
 
+    }
+
+    public static Date convertStringToDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = formatter.parse(dateString);
+        } catch (ParseException e) {
+            System.err.println("Formato de fecha inválido: " + e.getMessage());
+        }
+        return date;
+    }
+
+    public boolean checkDate(String date) {
+        Date dateD = convertStringToDate(date);
+        if (dateD.after(convertStringToDate("2023-10-17")) && dateD.before(convertStringToDate("2024-05-14"))) {
+            if(!dateD.equals(convertStringToDate("2024-04-24"))) {
+                return true;
+            }
+            return false;
+        } return false;
     }
 }

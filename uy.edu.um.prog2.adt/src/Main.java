@@ -59,8 +59,9 @@ public class Main {
                                 System.out.println();
                                 System.out.println("Ingrese una fecha a continuacion (YYYY-MM-DD): ");
                                 fecha = input.next();
-                                //if (fecha valida)
-                                fechaValida= true;
+                                if (checker.checkDate(fecha)) {
+                                    fechaValida = true;
+                                }
                             }
                             metodos.opcion1(pais, fecha);
                             opcion1 = false;
@@ -76,8 +77,9 @@ public class Main {
                                 System.out.println();
                                 System.out.println("Ingrese una fecha a continuacion (YYYY-MM-DD): ");
                                 fecha = input.next();
-                                //if (fecha valida)
-                                fechaValida = true;
+                                if (checker.checkDate(fecha)) {
+                                    fechaValida = true;
+                                }
                             }
                             metodos.opcion2(fecha);
                             opcion2 = false;
@@ -95,15 +97,17 @@ public class Main {
                                 System.out.println();
                                 System.out.println("Ingrese una fecha de inicio a continuacion (YYYY-MM-DD): ");
                                 fechaInicio = input.next();
-                                //if (fecha valida)
-                                fechaInicioValida = true;
+                                if (checker.checkDate(fechaInicio)) {
+                                    fechaInicioValida = true;
+                                }
                             }
                             while (!fechaFinValida) {
                                 System.out.println();
                                 System.out.println("Ingrese una fecha de finalizacion a continuacion (YYYY-MM-DD): ");
                                 fechaFin = input.next();
-                                //if (fecha valida)
-                                fechaFinValida = true;
+                                if (checker.checkDate(fechaFin)) {
+                                    fechaFinValida = true;
+                                }
                             }
                             metodos.opcion3(fechaInicio, fechaFin);
                             opcion3 = false;

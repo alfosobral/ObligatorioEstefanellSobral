@@ -23,7 +23,7 @@ public class Main {
             direccion = input.nextLine();
             if (direccion != null) {
                 direccionValida = true;
-                direccion = direccion.replaceAll("\"", "");
+                direccion = direccion.replaceAll("\"", "").trim();
             } else {
                 System.out.println();
                 System.out.println("Error! Ingrese una direccion correcta.");

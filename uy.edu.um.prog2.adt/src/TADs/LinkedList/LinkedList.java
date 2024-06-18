@@ -7,9 +7,11 @@ import TADs.LinkedList.Exceptions.InvalidIndex;
 public class LinkedList<T> implements MyList<T> {
     private Node<T> first;
     private Node<T> last;
+    private int size;
     public LinkedList() {
         this.first = null;
         this.last = null;
+        this.size = 0;
     }
 
     @Override
@@ -21,6 +23,7 @@ public class LinkedList<T> implements MyList<T> {
             aux.setNext(this.first);                      //hago que el siguiente al ultimo nodo sea el auxiliar
             this.first = aux;                             //seteo el ultimo nodo para que ahora sea el que agregamos
         }
+        this.size++;
     }
     @Override
     public T get(int position) throws InvalidIndex, EmptyList{
@@ -85,6 +88,7 @@ public class LinkedList<T> implements MyList<T> {
         } else {
             throw new EmptyList();
         }
+        this.size--;
     }
 
     @Override
@@ -118,24 +122,12 @@ public class LinkedList<T> implements MyList<T> {
             } else {
                 throw new EmptyList();
             }
+            this.size--;
         }
 
 
     @Override
     public int size() {
-        int size = 0;
-        if (this.first != null) {
-            Node<T> temp = this.first;
-            size++;
-            if (temp == this.first && temp == this.last) {          //si el temp es al mismo tiempo el primer nodo y el ultimo
-                size = 1;                                           //la lista tiene un elemento => size = 1
-            } else {                                                //sino
-                while (temp.getNext() != null) {                    //mientras el siguiente al temp no sea nulo
-                    temp = temp.getNext();                          //me muevo de nodo
-                    size++;                                         //size aumenta en 1
-                }
-            }
-        }
         return size;
     }
 
@@ -152,6 +144,7 @@ public class LinkedList<T> implements MyList<T> {
             temp.setNext(aux);
             this.last = aux;
         }
+        this.size++;
     }
 
     @Override

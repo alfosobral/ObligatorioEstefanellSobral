@@ -13,7 +13,7 @@ public class Checker {
             "NL", "NI", "NG", "MY", "MX", "MA", "LV", "LU", "LT", "KZ", "KR", "JP", "IT", "IS", "IN", "IL", "IE", "ID", "HU", "HN", "HK", "GT", "GR", "GB", "FR", "FI", "ES", "EG", "EE",
             "EC", "DO", "DK", "DE", "CZ", "CR", "CO", "CL", "CH", "CA", "BY", "BR", "BO", "BG", "BE", "AU", "AT", "AR", "AE"};
 
-    private String[] nombresPaises = {"global", "sudafrica", "vietnam", "venezuela", "uruguay", "uestados unidos", "ucrania", "taiwan", "turquia", "tailandia", "el salvador", "slovakia",
+    private String[] nombresPaises = {"global", "sudafrica", "vietnam", "venezuela", "uruguay", "estados unidos", "ucrania", "taiwan", "turquia", "tailandia", "el salvador", "slovakia",
             "singapur", "suecia", "arabia saudita", "romania", "paraguay", "portugal", "polonia", "pakistan", "filipinas", "peru", "panama", "nueva zelanda", "noruega",
             "paises bajos", "nicaragua", "nigeria", "malaysia", "mexico", "marruecos", "latvia", "luxembourg", "lituania", "kazakhstan", "corea del sur", "japon", "italia",
             "islandia", "india", "israel", "irlanda", "indonesia", "hungria", "honduras", "hong kong", "guatemala", "grecia", "reino unido", "francia", "finlandia",
@@ -36,8 +36,7 @@ public class Checker {
         }
 
     }
-
-    public static Date convertStringToDate(String dateString) {
+    public Date convertStringToDate(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
@@ -47,7 +46,6 @@ public class Checker {
         }
         return date;
     }
-
     public boolean checkDate(String date) {
         if (date.length() == 10){
             for (int i = 0; i < date.length(); i++) {
@@ -55,13 +53,13 @@ public class Checker {
                 switch (i){
                     case 0,1,2,3,5,6,8,9:
                         if (!Character.isDigit(ch)){
-                            System.out.println("Fecha inválida: " + date);
+                            System.out.println("Error! Fecha inválida: " + date);
                             return false;
                         }
                         break;
                     case 4,7:
                         if (ch != '-') {
-                            System.out.println("Fecha inválida: " + date);
+                            System.out.println("Error! Fecha inválida: " + date);
                             return false;
                         }
                         break;
@@ -69,7 +67,7 @@ public class Checker {
                 }
             }
         }else {
-            System.out.println("Fecha inválida: " + date);
+            System.out.println("Error! Fecha inválida: " + date);
             return false;
         }
         Date dateD = convertStringToDate(date);
@@ -83,4 +81,12 @@ public class Checker {
         System.out.println("Fecha inválida: " + date);
         return false;
     }
+    public double checkTempo(String tempo) throws NumberFormatException {
+        if (tempo == null || !tempo.matches("\\d{3}\\.\\d{3}")) {
+            return 0;
+        }
+        return Double.parseDouble(tempo);
+    }
+
+
 }

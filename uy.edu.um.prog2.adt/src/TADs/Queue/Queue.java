@@ -91,6 +91,14 @@ public class Queue<T> implements MyQueue<T>{
     public void printLast() {
         System.out.println(this.last.getValue());
     }
+
+    public boolean isEmpty() {
+        if (this.first == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

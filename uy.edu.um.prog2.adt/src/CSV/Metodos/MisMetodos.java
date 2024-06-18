@@ -12,8 +12,8 @@ import java.util.Date;
 public interface MisMetodos {
     public void opcion1 (String pais, String  dia) throws InvalidCountry, InvalidHashKey, EmptyList, InvalidIndex;
     public void opcion2 (String dia) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree;
-    public void opcion3 (String inicio, String fin) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree;
-    public int opcion4 (String artista, Date dia);
-    public int opcion5 (Date inicio, Date fin);
+    public void opcion3 (Date inicio, Date fin) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree;
+    public void opcion4 (String artista, String dia) throws InvalidHashKey, EmptyList, InvalidIndex;
+    public void opcion5 (Date inicio, Date fin, double tempoIni, double tempoFin) throws InvalidHashKey, EmptyList, InvalidIndex;
     }
 

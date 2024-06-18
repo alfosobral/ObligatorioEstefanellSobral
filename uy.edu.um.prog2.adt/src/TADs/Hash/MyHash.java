@@ -15,7 +15,7 @@ public interface MyHash<K,T> {
 
     void reSize();
 
-    void reOrganize(int newSize);
+    void reOrganize();
 
     void printHash();
 

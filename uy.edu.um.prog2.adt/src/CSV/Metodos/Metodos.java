@@ -3,7 +3,6 @@ package CSV.Metodos;
 import CSV.Entities.Checker;
 import CSV.Entities.ManipularCSV;
 import CSV.Entities.Song;
-import CSV.Exceptions.InvalidCountry;
 import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.Hash.Hash;
 import TADs.LinkedList.Exceptions.EmptyList;
@@ -12,7 +11,6 @@ import TADs.LinkedList.LinkedList;
 import TADs.Tree.BinaryTree;
 import TADs.Tree.Exceptions.EmptyTree;
 import TADs.Tree.Exceptions.InvalidKey;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,7 +33,7 @@ public class Metodos implements MisMetodos{
     }
 
     @Override
-    public void opcion1(String pais, String dia) throws InvalidCountry, InvalidHashKey, EmptyList, InvalidIndex {
+    public void opcion1(String pais, String dia) throws InvalidHashKey, EmptyList, InvalidIndex {
         System.out.println();
         System.out.println("ESTE ES EL TOP 10");
         String key = pais + dia;
@@ -211,6 +209,7 @@ public class Metodos implements MisMetodos{
     @Override
     public void opcion5(Date fechaIni, Date fechaFin, double tempoIni, double tempoFin) throws InvalidHashKey, EmptyList, InvalidIndex {
         LinkedList<String> top50;
+        Date fechaIniO = fechaIni;
 
         int counter = 0;
 
@@ -233,21 +232,11 @@ public class Metodos implements MisMetodos{
 
         if (counter > 0) {
             System.out.println();
-            System.out.println("Hay un total de " + counter + " canciones con tempo entre " + tempoIni + " y " + tempoFin + ", dentro de los top 50 entre " + convertirFecha(fechaIni) + " y " + convertirFecha(fechaFin));
+            System.out.println("Hay un total de " + counter + " canciones con tempo entre " + tempoIni + " y " + tempoFin + ", dentro de los top 50 entre " + convertirFecha(fechaIniO) + " y " + convertirFecha(fechaFin));
         } else {
             System.out.println();
             System.out.println("Lo sentimos, no hay canciones que cumplen esas caracteristicas.");
         }
-    }
-    public static Date convertStringToDate(String dateString) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = formatter.parse(dateString);
-        } catch (ParseException e) {
-            System.err.println("Formato de fecha inválido: " + e.getMessage());
-        }
-        return date;
     }
     public static String convertirFecha(Date fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");

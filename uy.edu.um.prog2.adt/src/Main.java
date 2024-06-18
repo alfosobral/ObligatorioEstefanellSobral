@@ -1,5 +1,4 @@
 import CSV.Entities.Checker;
-import CSV.Exceptions.InvalidCountry;
 import CSV.Metodos.Metodos;
 import TADs.Hash.Exceptions.InvalidHashKey;
 import TADs.LinkedList.Exceptions.EmptyList;
@@ -10,7 +9,7 @@ import TADs.Tree.Exceptions.InvalidKey;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException, EmptyList, InvalidIndex, InvalidCountry, InvalidHashKey, EmptyTree, InvalidKey, EmptyQueue {
+    public static void main(String[] args) throws InterruptedException, EmptyList, InvalidIndex, InvalidHashKey, EmptyTree, InvalidKey, EmptyQueue {
         boolean programaFuncionando = true;
 
         Scanner input = new Scanner(System.in);

@@ -1,9 +1,4 @@
 package CSV.Entities;
-
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.LinkedList;
-
 public class Song {
     private String spotify_id;
     private String name;

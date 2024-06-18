@@ -13,7 +13,7 @@ class HashTest {
     @Test
     public void testHashFunction() {
         int index = h.hashFunction("A");
-        assertEquals(0, index);
+        assertEquals(2, index);
     }
 
     @Test

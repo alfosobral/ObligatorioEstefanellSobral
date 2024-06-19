@@ -210,8 +210,7 @@ public class Metodos implements MisMetodos{
     public void opcion5(Date fechaIni, Date fechaFin, double tempoIni, double tempoFin) throws InvalidHashKey, EmptyList, InvalidIndex {
         LinkedList<String> top50;
         Date fechaIniO = fechaIni;
-
-        int counter = 0;
+        LinkedList<String> canciones = new LinkedList<>();
 
         do {
             String fechaTemp = convertirFecha(fechaIni);
@@ -221,8 +220,8 @@ public class Metodos implements MisMetodos{
                     top50 = datos.getHashTablaRelaciones().search(key);
                     for (int j = 0; j < top50.size(); j++) {
                         Song s = datos.getHashCanciones().search(top50.get(j));
-                        if (s.getTempo() >= tempoIni && s.getTempo() <= tempoFin) {
-                            counter++;
+                        if (s.getTempo() >= tempoIni && s.getTempo() <= tempoFin && !canciones.contains(s.getSpotify_id())) {
+                            canciones.addLast(s.getSpotify_id());
                         }
                     }
                 }
@@ -230,9 +229,9 @@ public class Metodos implements MisMetodos{
             fechaIni = aumentarDia(fechaIni);
         } while (fechaIni.before(fechaFin) || fechaIni.equals(fechaFin));
 
-        if (counter > 0) {
+        if (canciones.size() > 0) {
             System.out.println();
-            System.out.println("Hay un total de " + counter + " canciones con tempo entre " + tempoIni + " y " + tempoFin + ", dentro de los top 50 entre " + convertirFecha(fechaIniO) + " y " + convertirFecha(fechaFin));
+            System.out.println("Hay un total de " + canciones.size() + " canciones con tempo entre " + tempoIni + " y " + tempoFin + ", dentro de los top 50 entre " + convertirFecha(fechaIniO) + " y " + convertirFecha(fechaFin));
         } else {
             System.out.println();
             System.out.println("Lo sentimos, no hay canciones que cumplen esas caracteristicas.");

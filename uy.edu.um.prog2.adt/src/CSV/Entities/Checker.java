@@ -22,19 +22,35 @@ public class Checker {
 
     public String checkCountry(String country) throws InvalidHashKey {
 
-        country = country.toLowerCase();
-        Hash<String, String> hashPaises = new Hash<>(5);
+        if (country.length() > 2) {
+            country = country.toLowerCase();
+            Hash<String, String> hashPaises = new Hash<>(5);
 
-        for (int i = 0; i < codPaises.length; i++) {
-            hashPaises.add(nombresPaises[i], codPaises[i]);
-        }
+            for (int i = 0; i < codPaises.length; i++) {
+                hashPaises.add(nombresPaises[i], codPaises[i]);
+            }
 
-        if (!hashPaises.contains(country)) {
-            return null;
+            if (!hashPaises.contains(country)) {
+                return null;
+            } else {
+                return hashPaises.search(country);
+            }
+        } else if (country.length() == 2) {
+            country = country.toUpperCase();
+            boolean codPaisEsta = false;
+            for (int i = 0; i < codPaises.length; i++) {
+                if (country.equals(codPaises[i])) {
+                    codPaisEsta = true;
+                }
+            }
+            if (codPaisEsta) {
+                return country;
+            } else {
+                return null;
+            }
         } else {
-            return hashPaises.search(country);
+            return null;
         }
-
     }
     public Date convertStringToDate(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

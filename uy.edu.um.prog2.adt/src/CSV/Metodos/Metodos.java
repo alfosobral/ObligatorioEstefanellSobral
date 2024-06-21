@@ -34,6 +34,7 @@ public class Metodos implements MisMetodos{
 
     @Override
     public void opcion1(String pais, String dia) throws InvalidHashKey, EmptyList, InvalidIndex {
+
         System.out.println();
         System.out.println("ESTE ES EL TOP 10");
         String key = pais + dia;
@@ -42,6 +43,7 @@ public class Metodos implements MisMetodos{
             Song s = datos.getHashCanciones().search(idSongs.get(i));
             System.out.println((i + 1) + " - " + s.getName() + ", " + s.getArtists());
         }
+
     }
     @Override
     public void opcion2(String dia) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree {
@@ -90,8 +92,8 @@ public class Metodos implements MisMetodos{
 
             do {
                 String fechaTemp = convertirFecha(fechaIni);
-                for (int i = 0; i < codPaises.length; i++) {
-                    String key = codPaises[i] + fechaTemp;
+                for (String codigo : codPaises) {
+                    String key = codigo + fechaTemp;
                     if (datos.getHashTablaRelaciones().contains(key)) {
                         top50 = datos.getHashTablaRelaciones().search(key);
                         for (int j = 0; j < top50.size(); j++) {
@@ -164,7 +166,7 @@ public class Metodos implements MisMetodos{
                     String pais = null;
                     while (!paisValido) {
                         System.out.println();
-                        System.out.println("Ingrese un pais a continuacion: ");
+                        System.out.println("Ingrese un pais a continuacion (codigo o nombre):  ");
                         pais = input.nextLine();
                         if (checker.checkCountry(pais) != null) {
                             paisValido = true;
@@ -214,8 +216,8 @@ public class Metodos implements MisMetodos{
 
         do {
             String fechaTemp = convertirFecha(fechaIni);
-            for (int i = 0; i < codPaises.length; i++) {
-                String key = codPaises[i] + fechaTemp;
+            for (String codigo : codPaises) {
+                String key = codigo + fechaTemp;
                 if (datos.getHashTablaRelaciones().contains(key)) {
                     top50 = datos.getHashTablaRelaciones().search(key);
                     for (int j = 0; j < top50.size(); j++) {

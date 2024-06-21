@@ -31,10 +31,6 @@ public class Main {
 
         System.out.println();
         System.out.println("Cargando base de datos");
-        for (int i = 0; i < 3; i++) {
-            System.out.println(".");
-            Thread.sleep(333);
-        }
 
         Metodos metodos = new Metodos(direccion);
 
@@ -67,7 +63,7 @@ public class Main {
                                     String fecha = null;
                                     while (!paisValido) {
                                         System.out.println();
-                                        System.out.println("Ingrese un pais a continuacion: ");
+                                        System.out.println("Ingrese un pais a continuacion (codigo o nombre): ");
                                         pais = input.nextLine();
                                         pais = checker.checkCountry(pais);
                                         if (pais != null) {
@@ -103,6 +99,7 @@ public class Main {
                                         } else {
                                             System.out.println("Error! Ingrese una opcion valida.");
                                         }
+                                        input.nextLine();
                                     }
                                 }
                                 break;
@@ -138,6 +135,7 @@ public class Main {
                                         } else {
                                             System.out.println("Error! Ingrese una opcion valida.");
                                         }
+                                        input.nextLine();
                                     }
                                 }
                                 break;
@@ -186,6 +184,7 @@ public class Main {
                                         } else {
                                             System.out.println("Error! Ingrese una opcion valida.");
                                         }
+                                        input.nextLine();
                                     }
                                 }
                                 break;
@@ -235,6 +234,7 @@ public class Main {
                                         } else {
                                             System.out.println("Error! Ingrese una opcion valida.");
                                         }
+                                        input.nextLine();
                                     }
                                 }
                                 break;
@@ -272,7 +272,7 @@ public class Main {
                                     input.nextLine();
                                     while (!tempoInicioValido) {
                                         System.out.println();
-                                        System.out.println("Ingrese el tempo menor del tango (XXX.XXX): ");
+                                        System.out.println("Ingrese el tempo menor del rango (XXX.XXX): ");
                                         tempoInicio = input.nextLine();
                                         if (checker.checkTempo(tempoInicio) != 0) {
                                             tempoInicioValido = true;
@@ -283,7 +283,7 @@ public class Main {
                                     }
                                     while (!tempoFinValido) {
                                         System.out.println();
-                                        System.out.println("Ingrese el tempo mayor del tango (XXX.XXX): ");
+                                        System.out.println("Ingrese el tempo mayor del rango (XXX.XXX): ");
                                         tempoFin = input.nextLine();
                                         if (checker.checkTempo(tempoFin) != 0) {
                                             tempoFinValido = true;
@@ -310,6 +310,7 @@ public class Main {
                                         } else {
                                             System.out.println("Error! Ingrese una opcion valida.");
                                         }
+                                        input.nextLine();
                                     }
                                 }
                                 break;
@@ -331,8 +332,9 @@ public class Main {
         System.out.println("Apagando sistema.");
         for (int i = 0; i < 3; i++) {
             System.out.println(".");
-            Thread.sleep(333);
+            Thread.sleep(1000);
         }
+        System.out.println();
         System.out.println("Finalizado.");
 
 

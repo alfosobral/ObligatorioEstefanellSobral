@@ -39,6 +39,8 @@ public class ManipularCSV {
         } catch (IOException | InvalidHashKey e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+
+
     }
 
     private void processLine(String[] atributos, String keyActual, String paisActual, String fechaActual) throws InvalidHashKey {
@@ -76,7 +78,7 @@ public class ManipularCSV {
                 return Double.parseDouble(atributos[23]);
             }
         } catch (NumberFormatException e) {
-            return 0.0; // Default tempo value if parsing fails
+            return 0.0;
         }
     }
 

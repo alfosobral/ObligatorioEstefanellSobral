@@ -15,13 +15,17 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
-
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 
 
 public class Metodos implements MisMetodos{
     private Scanner input = new Scanner(System.in);;
     private Checker checker = new Checker();
     private ManipularCSV datos;
+
+
     String[] codPaises = {"GLB", "ZA", "VN", "VE", "UY", "US", "UA", "TW", "TR", "TH", "SV", "SK", "SG", "SE", "SA", "RO", "PY", "PT", "PL", "PK", "PH", "PE", "PA", "NZ", "NO",
             "NL", "NI", "NG", "MY", "MX", "MA", "LV", "LU", "LT", "KZ", "KR", "JP", "IT", "IS", "IN", "IL", "IE", "ID", "HU", "HN", "HK", "GT", "GR", "GB", "FR", "FI", "ES", "EG", "EE",
             "EC", "DO", "DK", "DE", "CZ", "CR", "CO", "CL", "CH", "CA", "BY", "BR", "BO",
@@ -34,7 +38,7 @@ public class Metodos implements MisMetodos{
 
     @Override
     public void opcion1(String pais, String dia) throws InvalidHashKey, EmptyList, InvalidIndex {
-
+        long memoryBefore = getUsedMemory();
         System.out.println();
         System.out.println("ESTE ES EL TOP 10");
         String key = pais + dia;
@@ -43,10 +47,14 @@ public class Metodos implements MisMetodos{
             Song s = datos.getHashCanciones().search(idSongs.get(i));
             System.out.println((i + 1) + " - " + s.getName() + ", " + s.getArtists());
         }
+        long memoryAfter = getUsedMemory();
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
 
     }
     @Override
     public void opcion2(String dia) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree {
+        long memoryBefore = getUsedMemory();
         LinkedList<String> listaTodasLasCanciones = new LinkedList<>();
         Hash<String, Integer> contadorCanciones = new Hash<>(5);
         BinaryTree<Integer, String> top5Canciones = new BinaryTree<>();
@@ -83,9 +91,13 @@ public class Metodos implements MisMetodos{
             System.out.println((i + 1) + " - " + s.getName() + ", " + s.getArtists() + " (" + top5Canciones.getMax().getKey() + " apariciones)");
             top5Canciones.delete(top5Canciones.getMax().getKey());
         }
+        long memoryAfter = getUsedMemory();
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     @Override
     public void opcion3(Date fechaIni, Date fechaFin) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree {
+        long memoryBefore = getUsedMemory();
         LinkedList<String> top50;
         Hash<String, Integer> contadorArtistas = new Hash<>(5);
         BinaryTree<Integer, String> top7Artistas = new BinaryTree<>();
@@ -128,9 +140,14 @@ public class Metodos implements MisMetodos{
             System.out.println((i + 1) + " - " + artist + " (" + top7Artistas.getMax().getKey() + " apariciones)");
             top7Artistas.delete(top7Artistas.getMax().getKey());
         }
+
+        long memoryAfter = getUsedMemory();
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     @Override
     public void opcion4(String artistaEspecifico, String dia) throws InvalidHashKey, EmptyList, InvalidIndex {
+        long memoryBefore = getUsedMemory();
         String artistaEspecificoLowerCase = artistaEspecifico.toLowerCase();
         LinkedList<String> top50 = new LinkedList<>();
         int counter = 0;
@@ -207,9 +224,14 @@ public class Metodos implements MisMetodos{
             System.out.println();
             System.out.println("Lo sentimos, el artista no tiene apariciones para esa fecha.");
         }
+
+        long memoryAfter = getUsedMemory();
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     @Override
     public void opcion5(Date fechaIni, Date fechaFin, double tempoIni, double tempoFin) throws InvalidHashKey, EmptyList, InvalidIndex {
+        long memoryBefore = getUsedMemory();
         LinkedList<String> top50;
         Date fechaIniO = fechaIni;
         LinkedList<String> canciones = new LinkedList<>();
@@ -238,6 +260,10 @@ public class Metodos implements MisMetodos{
             System.out.println();
             System.out.println("Lo sentimos, no hay canciones que cumplen esas caracteristicas.");
         }
+
+        long memoryAfter = getUsedMemory();
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     public static String convertirFecha(Date fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -248,5 +274,13 @@ public class Metodos implements MisMetodos{
         calendario.setTime(fecha);
         calendario.add(Calendar.DAY_OF_MONTH, 1);
         return calendario.getTime();
+    }
+
+    private static MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
+
+    // Método para obtener la cantidad de memoria utilizada
+    public static long getUsedMemory() {
+        MemoryUsage heapMemoryUsage = memoryBean.getHeapMemoryUsage();
+        return heapMemoryUsage.getUsed();
     }
 }

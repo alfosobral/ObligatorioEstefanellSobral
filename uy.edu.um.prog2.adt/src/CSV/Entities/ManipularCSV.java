@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static CSV.Metodos.Metodos.getUsedMemory;
+
 public class ManipularCSV {
     private String texto;
     private String[] atributos;
@@ -16,6 +18,7 @@ public class ManipularCSV {
     private Hash<String, Song> hashCanciones = new Hash<>(5);
 
     public void readFile(String fileName) {
+        long memoryBefore = getUsedMemory();
         String keyActual = "****";
         String paisActual = "GLB";
         String fechaActual = "2024-05-13";
@@ -40,7 +43,9 @@ public class ManipularCSV {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
-
+        long memoryAfter = getUsedMemory();
+        long memoryUsed = memoryAfter - memoryBefore;
+        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
 
     private void processLine(String[] atributos, String keyActual, String paisActual, String fechaActual) throws InvalidHashKey {
@@ -68,6 +73,7 @@ public class ManipularCSV {
             keyActual = key;
         }
         hashTablaRelaciones.search(key).addLast(atributos[0]);
+
     }
 
     private double parseTempo(String[] atributos) {

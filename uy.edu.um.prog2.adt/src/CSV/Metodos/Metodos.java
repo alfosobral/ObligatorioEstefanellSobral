@@ -93,7 +93,7 @@ public class Metodos implements MisMetodos{
         }
         long memoryAfter = getUsedMemory();
         long memoryUsed = memoryAfter - memoryBefore;
-        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
+        //System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     @Override
     public void opcion3(Date fechaIni, Date fechaFin) throws InvalidHashKey, EmptyList, InvalidIndex, InvalidKey, EmptyTree {
@@ -143,7 +143,7 @@ public class Metodos implements MisMetodos{
 
         long memoryAfter = getUsedMemory();
         long memoryUsed = memoryAfter - memoryBefore;
-        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
+        //System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     @Override
     public void opcion4(String artistaEspecifico, String dia) throws InvalidHashKey, EmptyList, InvalidIndex {
@@ -218,6 +218,9 @@ public class Metodos implements MisMetodos{
 
                 } else if (respuesta.equals("n")) {
                     respuestaValida = true;
+                } else {
+                    System.out.println("Error! Ingrese un parametro valido (s/n)");
+                    System.out.println();
                 }
             }
         } else {
@@ -227,7 +230,7 @@ public class Metodos implements MisMetodos{
 
         long memoryAfter = getUsedMemory();
         long memoryUsed = memoryAfter - memoryBefore;
-        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
+        //System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     @Override
     public void opcion5(Date fechaIni, Date fechaFin, double tempoIni, double tempoFin) throws InvalidHashKey, EmptyList, InvalidIndex {
@@ -255,7 +258,7 @@ public class Metodos implements MisMetodos{
 
         if (canciones.size() > 0) {
             System.out.println();
-            System.out.println("Hay un total de " + canciones.size() + " canciones con tempo entre " + tempoIni + " y " + tempoFin + ", dentro de los top 50 entre " + convertirFecha(fechaIniO) + " y " + convertirFecha(fechaFin));
+            System.out.println("Hay un total de " + canciones.size() + " canciones con tempo entre " + tempoIni + " y " + tempoFin + ", dentro de los top 50 entre el " + convertirFecha(fechaIniO) + " y el " + convertirFecha(fechaFin));
         } else {
             System.out.println();
             System.out.println("Lo sentimos, no hay canciones que cumplen esas caracteristicas.");
@@ -263,7 +266,7 @@ public class Metodos implements MisMetodos{
 
         long memoryAfter = getUsedMemory();
         long memoryUsed = memoryAfter - memoryBefore;
-        System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
+        //System.out.println("Memoria utilizada: " + memoryUsed + " bytes");
     }
     public static String convertirFecha(Date fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -278,7 +281,6 @@ public class Metodos implements MisMetodos{
 
     private static MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
 
-    // Método para obtener la cantidad de memoria utilizada
     public static long getUsedMemory() {
         MemoryUsage heapMemoryUsage = memoryBean.getHeapMemoryUsage();
         return heapMemoryUsage.getUsed();
